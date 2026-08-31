@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #020408;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Custom styled scrollbars for notebooks and modals */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(14, 23, 19, 0.6);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(76, 120, 93, 0.4);
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(229, 183, 107, 0.6);
+  }
+}
+
+@keyframes modalSpringIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.008) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cardStagger {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-fadeIn {
+  animation: modalSpringIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-stagger {
+  animation: cardStagger 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-softFloat {
+  animation: softFloat 4s ease-in-out infinite;
+}
+
+/* Hardware accelerated transition utility */
+.smooth-transform {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Ghibli Glowing Hover & Magnetic Spring Lift */
+.ghibli-glow-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+}
+
+.ghibli-glow-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7),
+              0 0 35px rgba(242, 209, 146, 0.35),
+              0 0 15px rgba(110, 231, 183, 0.25);
+  border-color: rgba(242, 209, 146, 0.85);
+}
+
+.ghibli-glow-button {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+}
+
+.ghibli-glow-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 25px rgba(229, 183, 107, 0.6),
+              0 0 10px rgba(254, 240, 138, 0.8);
+}
+
