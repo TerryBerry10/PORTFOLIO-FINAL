@@ -42,6 +42,8 @@ export interface DeveloperProfile {
   extendedBio: string[];
   philosophy: string;
   location: string;
+  phone?: string;
+  portfolioUrl?: string;
   status: string;
   email: string;
   links: {
@@ -56,6 +58,19 @@ export interface DeveloperProfile {
   resume: {
     summary: string;
     highlights: string[];
+    technicalSkills: {
+      category: string;
+      items: string;
+    }[];
+    featuredProjects: {
+      title: string;
+      role: string;
+      tech: string;
+      bullets: {
+        heading: string;
+        text: string;
+      }[];
+    }[];
     experience: {
       role: string;
       company: string;
@@ -67,7 +82,8 @@ export interface DeveloperProfile {
       degree: string;
       institution: string;
       year: string;
-      focus: string;
+      location?: string;
+      focus?: string;
     }[];
   };
 }

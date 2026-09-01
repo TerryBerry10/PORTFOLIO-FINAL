@@ -12,7 +12,7 @@ export const projects: Project[] = [
     status: 'Released',
     featured: true,
     technologies: ['UNITY', 'C#'],
-    playableUrl: 'https://play.unity.com/en/games/80577269-a-42a4-8bc2-07ebde267f23/dottie',
+    playableUrl: 'https://play.unity.com/en/games/80577269-b219-42a4-8bc2-07ebde267f23/dottie',
     repositoryUrl: 'https://github.com/Nigatron911',
     dioramaTheme: 'floating_island',
     shortDescription: '1 v 1 anime style battle — unleash your rage!',
