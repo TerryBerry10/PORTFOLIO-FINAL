@@ -190,6 +190,9 @@ export function App() {
       case 'lab':
         setActiveModal('lab');
         break;
+      case 'resume':
+        setActiveModal('resume');
+        break;
       case 'contact':
         setActiveModal('contact');
         break;
@@ -215,6 +218,10 @@ export function App() {
           onViewProjects={() => {
             setIsLoaded(true);
             setActiveModal('gallery');
+          }}
+          onViewResume={() => {
+            setIsLoaded(true);
+            setActiveModal('resume');
           }}
         />
       )}
