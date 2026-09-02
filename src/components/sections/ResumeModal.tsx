@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { developerInfo } from '../../data/developerInfo';
-import { X, Download, Copy, Check, FileText, Briefcase, GraduationCap, Wrench, Sparkles, Phone, Mail, MapPin, Globe, Gamepad2 } from 'lucide-react';
+import { X, Download, Copy, Check, FileText, Printer, Sparkles, MapPin, Phone, Mail, Globe, ExternalLink } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
 
 interface ResumeModalProps {
@@ -56,50 +56,65 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleDownloadPDF = () => {
+  const handlePrint = () => {
     AudioEngine.playSfx('interact');
     window.print();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/40 backdrop-blur-md overflow-y-auto animate-fadeIn select-none">
-      {/* Transparent Frosted Glass Modal Container */}
-      <div className="relative w-full max-w-5xl bg-black/35 backdrop-blur-2xl border-2 border-white/20 rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.9)] overflow-hidden my-auto flex flex-col max-h-[92vh] text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/60 backdrop-blur-md overflow-y-auto animate-fadeIn select-none">
+      {/* Container */}
+      <div className="relative w-full max-w-5xl bg-[#090d16]/95 backdrop-blur-2xl border-2 border-white/20 rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden my-auto flex flex-col max-h-[94vh] text-white">
         
-        {/* Header */}
-        <div className="bg-white/[0.04] border-b border-white/15 p-6 sm:p-8 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-              <FileText className="w-6 h-6" />
+        {/* Top Control Bar */}
+        <div className="bg-white/[0.04] border-b border-white/15 p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+              <FileText className="w-5 h-5" />
             </div>
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-0.5">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>// OFFICIAL RESUME · CURRICULUM VITAE</span>
+                <span>// CURRICULUM VITAE · OFFICIAL PDF</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black font-sans text-white tracking-tight">
-                {developerInfo.name} — Resume
+              <h2 className="text-xl sm:text-2xl font-black font-sans text-white tracking-tight">
+                {developerInfo.name} — Resume Document
               </h2>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
+            {/* Direct PDF Download Button */}
+            <a
+              href="/Vinay_Sankar_Resume.pdf"
+              download="Vinay_Sankar_Resume.pdf"
+              onClick={() => AudioEngine.playSfx('interact')}
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs sm:text-sm font-black rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] hover:shadow-[0_0_35px_rgba(245,158,11,0.9)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-slate-950" />
+              <span>DOWNLOAD PDF</span>
+            </a>
+
+            {/* Print / Save PDF Button */}
+            <button
+              onClick={handlePrint}
+              className="hidden sm:flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold rounded-full border border-white/20 transition-all cursor-pointer active:scale-95"
+              title="Print / Save PDF"
+            >
+              <Printer className="w-3.5 h-3.5 text-white" />
+              <span>PRINT</span>
+            </button>
+
+            {/* Copy Text Button */}
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold rounded-full border border-white/20 transition-colors cursor-pointer"
+              className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold rounded-full border border-white/20 transition-all cursor-pointer active:scale-95"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'COPIED!' : 'COPY TEXT'}</span>
             </button>
 
-            <button
-              onClick={handleDownloadPDF}
-              className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs font-black rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-slate-950" />
-              <span>PRINT / PDF</span>
-            </button>
-
+            {/* Close Button */}
             <button
               onClick={() => {
                 AudioEngine.playSfx('closeModal');
@@ -113,139 +128,157 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
           </div>
         </div>
 
-        {/* Resume Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 bg-transparent text-paper-100 font-sans">
+        {/* Scrollable PDF Document Canvas Viewport */}
+        <div className="p-4 sm:p-8 overflow-y-auto bg-slate-950/80 flex justify-center items-start">
           
-          {/* Header Contact Strip */}
-          <div className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 rounded-2xl shadow-lg">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* Authentic A4 Document Sheet */}
+          <div className="w-full max-w-[820px] bg-white text-slate-900 rounded-lg shadow-[0_20px_60px_rgba(0,0,0,0.9)] p-6 sm:p-10 font-sans border border-slate-300 select-text">
+            
+            {/* Header: Name, Title & Contacts */}
+            <div className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#1e40af] pb-3 mb-4">
               <div>
-                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">{developerInfo.name.toUpperCase()}</h3>
-                <p className="text-sm sm:text-base font-mono text-amber-400 font-bold mt-1 tracking-wide">{developerInfo.title.toUpperCase()}</p>
+                <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none">
+                  {developerInfo.name.toUpperCase()}
+                </h1>
+                <p className="text-xs sm:text-sm font-bold text-[#1e40af] mt-1 tracking-wider uppercase">
+                  {developerInfo.title}
+                </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-paper-300">
-                <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-amber-400" /> {developerInfo.location}</span>
-                <span className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-amber-400" /> <a href={`tel:${developerInfo.phone || '+917356749187'}`} className="hover:text-amber-300">{developerInfo.phone || '+91 7356749187'}</a></span>
-                <span className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-amber-400" /> <a href={`mailto:${developerInfo.email}`} className="text-amber-400 hover:underline">{developerInfo.email}</a></span>
-                <span className="flex items-center gap-1.5"><Globe className="w-3.5 h-3.5 text-amber-400" /> <a href={developerInfo.portfolioUrl || 'https://final-portfolio-xi-topaz.vercel.app'} target="_blank" rel="noreferrer" className="text-amber-300 hover:underline">Portfolio ↗</a></span>
+              <div className="text-right text-xs font-normal text-slate-700 space-y-0.5">
+                <div className="flex items-center justify-end gap-1.5 font-medium">
+                  <span>{developerInfo.location}</span>
+                  <span>•</span>
+                  <span>{developerInfo.phone || '+91 7356749187'}</span>
+                </div>
+                <div>
+                  <a href={`mailto:${developerInfo.email}`} className="text-[#1e40af] hover:underline font-medium">
+                    {developerInfo.email}
+                  </a>
+                </div>
+                <div className="text-slate-600">
+                  Portfolio:{' '}
+                  <a href={developerInfo.portfolioUrl || 'https://final-portfolio-xi-topaz.vercel.app'} target="_blank" rel="noreferrer" className="text-[#1e40af] hover:underline font-medium">
+                    final-portfolio-xi-topaz.vercel.app
+                  </a>
+                </div>
               </div>
             </div>
+
+            {/* Section 1: Professional Summary */}
+            <section className="mb-4">
+              <h2 className="text-xs font-black text-[#1e40af] uppercase tracking-wider border-b border-slate-300 pb-0.5 mb-1.5">
+                PROFESSIONAL SUMMARY
+              </h2>
+              <p className="text-[12px] sm:text-[13px] text-slate-800 leading-relaxed font-normal">
+                {resume.summary}
+              </p>
+            </section>
+
+            {/* Section 2: Technical Skills & Tools */}
+            <section className="mb-4">
+              <h2 className="text-xs font-black text-[#1e40af] uppercase tracking-wider border-b border-slate-300 pb-0.5 mb-2">
+                TECHNICAL SKILLS & TOOLS
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-[12px] sm:text-[12.5px] leading-snug">
+                {resume.technicalSkills?.map((skill, i) => (
+                  <div key={i} className="flex flex-wrap items-baseline gap-1.5">
+                    <span className="font-bold text-slate-900">{skill.category}:</span>
+                    <span className="text-slate-700">{skill.items}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Section 3: Featured Game Projects */}
+            <section className="mb-4">
+              <h2 className="text-xs font-black text-[#1e40af] uppercase tracking-wider border-b border-slate-300 pb-0.5 mb-2.5">
+                FEATURED GAME PROJECTS
+              </h2>
+              <div className="space-y-3">
+                {resume.featuredProjects?.map((proj, i) => (
+                  <div key={i} className="space-y-1">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="text-[13px] sm:text-[13.5px] font-bold text-slate-900">
+                        {proj.title} <span className="font-normal text-slate-600">({proj.tech})</span>
+                      </h3>
+                      <span className="text-[12px] font-bold text-[#1e40af]">{proj.role}</span>
+                    </div>
+
+                    <ul className="space-y-1 text-[11.5px] sm:text-[12px] text-slate-800 list-disc list-outside pl-4">
+                      {proj.bullets.map((b, bi) => (
+                        <li key={bi} className="leading-relaxed">
+                          <strong className="font-bold text-slate-900">{b.heading}:</strong> {b.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Section 4: Freelance Experience */}
+            <section className="mb-4">
+              <h2 className="text-xs font-black text-[#1e40af] uppercase tracking-wider border-b border-slate-300 pb-0.5 mb-2">
+                FREELANCE EXPERIENCE
+              </h2>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-[13px] font-bold text-slate-900">Freelance Web & Application Developer</h3>
+                  <span className="text-[12px] font-bold text-[#1e40af]">Bangalore, India</span>
+                </div>
+                <ul className="space-y-1 text-[11.5px] sm:text-[12px] text-slate-800 list-disc list-outside pl-4">
+                  {resume.experience[0]?.bullets.map((bullet, bi) => (
+                    <li key={bi} className="leading-relaxed">{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Section 5: Education */}
+            <section>
+              <h2 className="text-xs font-black text-[#1e40af] uppercase tracking-wider border-b border-slate-300 pb-0.5 mb-2">
+                EDUCATION
+              </h2>
+              <div className="space-y-1.5 text-[12px] sm:text-[12.5px]">
+                {resume.education.map((ed, i) => (
+                  <div key={i} className="flex flex-wrap items-baseline justify-between gap-1">
+                    <div>
+                      <span className="font-bold text-slate-900">{ed.degree}</span>
+                      <span className="text-slate-700"> • {ed.institution}</span>
+                    </div>
+                    <div className="text-[12px] font-bold text-[#1e40af]">
+                      {ed.year} {ed.location && `• ${ed.location}`}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+        {/* Footer Bar */}
+        <div className="bg-white/[0.04] border-t border-white/15 px-6 py-3.5 flex flex-wrap items-center justify-between text-xs font-mono text-paper-300 gap-3">
+          <div className="flex items-center gap-3">
+            <span className="text-amber-400 font-bold">📄 Vinay_Sankar_Resume.pdf</span>
+            <span>•</span>
+            <span>Ready for Review & Hiring</span>
           </div>
 
-          {/* Professional Summary */}
-          <section className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 sm:p-7 rounded-2xl shadow-lg">
-            <h4 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-              <FileText className="w-4 h-4 text-amber-400" />
-              <span>// PROFESSIONAL SUMMARY</span>
-            </h4>
-            <p className="text-sm sm:text-base text-paper-200 leading-relaxed font-sans">
-              {resume.summary}
-            </p>
-          </section>
-
-          {/* Technical Skills & Tools */}
-          <section className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 sm:p-7 rounded-2xl shadow-lg">
-            <h4 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <Wrench className="w-4 h-4 text-amber-400" />
-              <span>// TECHNICAL SKILLS & TOOLS</span>
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {resume.technicalSkills?.map((skill, i) => (
-                <div key={i} className="bg-black/50 p-4 rounded-xl border border-white/10">
-                  <div className="text-xs font-mono font-bold text-amber-300 mb-1">{skill.category}</div>
-                  <div className="text-xs sm:text-sm text-paper-200 font-sans">{skill.items}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Featured Game Projects */}
-          <section className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 sm:p-7 rounded-2xl shadow-lg">
-            <h4 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-5 flex items-center gap-1.5">
-              <Gamepad2 className="w-4 h-4 text-amber-400" />
-              <span>// FEATURED GAME PROJECTS</span>
-            </h4>
-            <div className="space-y-6">
-              {resume.featuredProjects?.map((proj, i) => (
-                <div key={i} className="bg-black/50 p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-                    <div>
-                      <h5 className="font-bold text-base sm:text-lg text-white font-sans">{proj.title}</h5>
-                      <span className="text-xs font-mono text-amber-400 font-semibold">{proj.role}</span>
-                    </div>
-                    <span className="text-xs font-mono text-amber-300 font-bold bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/40">
-                      {proj.tech}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-2 text-xs sm:text-sm text-paper-200">
-                    {proj.bullets.map((b, bi) => (
-                      <li key={bi} className="leading-relaxed flex items-start gap-2">
-                        <span className="text-amber-400 font-bold shrink-0">▪</span>
-                        <span>
-                          <strong className="text-white font-semibold">{b.heading}:</strong> {b.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Freelance Experience */}
-          <section className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 sm:p-7 rounded-2xl shadow-lg">
-            <h4 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <Briefcase className="w-4 h-4 text-amber-400" />
-              <span>// FREELANCE EXPERIENCE</span>
-            </h4>
-            <div className="space-y-4">
-              {resume.experience.map((exp, i) => (
-                <div key={i} className="bg-black/50 p-5 rounded-xl border border-white/10">
-                  <div className="flex flex-wrap items-center justify-between gap-1 mb-2">
-                    <h5 className="font-bold text-base text-white">{exp.role}</h5>
-                    <span className="text-xs font-mono text-amber-300 font-bold">{exp.location}</span>
-                  </div>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-paper-200">
-                    {exp.bullets.map((b, bi) => (
-                      <li key={bi} className="leading-relaxed flex items-start gap-2">
-                        <span className="text-amber-400 font-bold shrink-0">▪</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Education */}
-          <section className="bg-black/45 backdrop-blur-xl border border-white/15 p-6 sm:p-7 rounded-2xl shadow-lg">
-            <h4 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <GraduationCap className="w-4 h-4 text-amber-400" />
-              <span>// EDUCATION</span>
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {resume.education.map((ed, i) => (
-                <div key={i} className="bg-black/50 p-5 rounded-xl border border-white/10 text-xs sm:text-sm text-paper-200 space-y-1">
-                  <div className="font-bold text-base text-white">{ed.degree}</div>
-                  <div className="text-paper-300 text-xs font-mono">{ed.institution}</div>
-                  <div className="flex justify-between text-xs font-mono text-amber-400 pt-1">
-                    <span>{ed.year}</span>
-                    {ed.location && <span>{ed.location}</span>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+          <div className="flex items-center gap-3">
+            <a
+              href="/Vinay_Sankar_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-300 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <span>Open in New Tab</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
 
-        {/* Footer */}
-        <div className="bg-white/[0.04] border-t border-white/15 px-6 py-4 flex flex-wrap items-center justify-between text-xs font-mono text-paper-400 gap-2">
-          <span className="text-amber-300 font-bold">AVAILABLE FOR TECHNICAL ARTIST & GAME DEVELOPER ROLES</span>
-          <span className="text-paper-300">{developerInfo.email} · {developerInfo.phone || '+91 7356749187'}</span>
-        </div>
       </div>
     </div>
   );
