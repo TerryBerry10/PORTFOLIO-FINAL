@@ -10,7 +10,6 @@ interface QuickViewModalProps {
   onOpenSkills: () => void;
   onOpenJourney: () => void;
   onOpenLab: () => void;
-  onOpenLevels?: () => void;
   onOpenResume: () => void;
   onOpenContact: () => void;
 }
@@ -20,7 +19,6 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
   onOpenSkills,
   onOpenJourney,
   onOpenLab,
-  onOpenLevels,
   onOpenResume,
   onOpenContact
 }) => {
@@ -85,17 +83,6 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             </button>
 
             <button
-              onClick={() => { onClose(); onOpenLevels?.(); }}
-              className="p-5 bg-black/45 hover:bg-black/65 border border-white/15 hover:border-emerald-400/60 rounded-2xl text-left transition-all flex items-start gap-3.5 cursor-pointer shadow-lg group hover:scale-[1.02]"
-            >
-              <Compass className="w-5 h-5 text-emerald-400 mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
-              <div>
-                <div className="text-sm font-bold font-sans text-white group-hover:text-emerald-300 transition-colors">LEVEL DESIGN</div>
-                <div className="text-xs font-mono text-paper-400 mt-0.5">Screenshots & Breakdowns</div>
-              </div>
-            </button>
-
-            <button
               onClick={() => { onClose(); onOpenLab(); }}
               className="p-5 bg-black/45 hover:bg-black/65 border border-white/15 hover:border-amber-400/60 rounded-2xl text-left transition-all flex items-start gap-3.5 cursor-pointer shadow-lg group hover:scale-[1.02]"
             >
@@ -119,7 +106,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
 
             <button
               onClick={() => { onClose(); onOpenContact(); }}
-              className="p-5 bg-black/45 hover:bg-black/65 border border-white/15 hover:border-amber-400/60 rounded-2xl text-left transition-all flex items-start gap-3.5 cursor-pointer shadow-lg group hover:scale-[1.02]"
+              className="p-5 bg-black/45 hover:bg-black/65 border border-white/15 hover:border-amber-400/60 rounded-2xl text-left transition-all flex items-start gap-3.5 cursor-pointer sm:col-span-2 shadow-lg group hover:scale-[1.02]"
             >
               <Mail className="w-5 h-5 text-amber-400 mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
               <div>

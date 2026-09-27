@@ -43,13 +43,6 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
         <span className="text-amber-400/40 text-sm font-bold">/</span>
         <button
-          onClick={() => handleNavClick('levels')}
-          className="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-sans font-bold tracking-wider text-white hover:text-emerald-300 hover:bg-white/15 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all cursor-pointer"
-        >
-          LEVELS
-        </button>
-        <span className="text-amber-400/40 text-sm font-bold">/</span>
-        <button
           onClick={() => handleNavClick('about')}
           className="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-sans font-bold tracking-wider text-white hover:text-amber-300 hover:bg-white/15 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all cursor-pointer"
         >

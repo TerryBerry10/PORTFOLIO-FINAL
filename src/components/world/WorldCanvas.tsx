@@ -54,9 +54,9 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
       engine.setScreenMouse(e.clientX, e.clientY);
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('keydown', handleKeyDown, { passive: true });
+    window.addEventListener('keyup', handleKeyUp, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       engine.destroy();
