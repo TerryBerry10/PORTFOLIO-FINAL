@@ -26,6 +26,7 @@ import { ProjectBreakdownModal } from './components/portfolio/ProjectBreakdownMo
 import { SkillsWorkshopModal } from './components/sections/SkillsWorkshopModal';
 import { JourneyTreeModal } from './components/sections/JourneyTreeModal';
 import { LabExperimentsModal } from './components/sections/LabExperimentsModal';
+import { LevelDesignModal } from './components/sections/LevelDesignModal';
 import { ResumeModal } from './components/sections/ResumeModal';
 import { CampfireContactModal } from './components/sections/CampfireContactModal';
 import { MiniGamesModal } from './components/sections/MiniGamesModal';
@@ -49,7 +50,7 @@ export function App() {
   // Active Zone & Modals
   const [activeZoneId, setActiveZoneId] = useState<ZoneId | null>(null);
   const [activeModal, setActiveModal] = useState<
-    'gallery' | 'breakdown' | 'skills' | 'journey' | 'lab' | 'resume' | 'contact' | 'map' | 'quickView' | 'recruiter' | 'minigames' | null
+    'gallery' | 'breakdown' | 'skills' | 'journey' | 'levels' | 'lab' | 'resume' | 'contact' | 'map' | 'quickView' | 'recruiter' | 'minigames' | null
   >(null);
   const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
 
@@ -183,6 +184,9 @@ export function App() {
         break;
       case 'projects':
         setActiveModal('gallery');
+        break;
+      case 'levels':
+        setActiveModal('levels');
         break;
       case 'about':
         setActiveModal('journey');
@@ -322,6 +326,12 @@ export function App() {
         />
       )}
 
+      {activeModal === 'levels' && (
+        <LevelDesignModal
+          onClose={() => setActiveModal(null)}
+        />
+      )}
+
       {activeModal === 'resume' && (
         <ResumeModal
           onClose={() => setActiveModal(null)}
@@ -350,6 +360,7 @@ export function App() {
           onOpenSkills={() => setActiveModal('skills')}
           onOpenJourney={() => setActiveModal('journey')}
           onOpenLab={() => setActiveModal('lab')}
+          onOpenLevels={() => setActiveModal('levels')}
           onOpenResume={() => setActiveModal('resume')}
           onOpenContact={() => setActiveModal('contact')}
         />
