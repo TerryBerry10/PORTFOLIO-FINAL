@@ -20,7 +20,7 @@ export const developerInfo: DeveloperProfile = {
   links: {
     github: "https://github.com/Nigatron911",
     unityPlay: "https://play.unity.com/en/user/1aa32da2-fe9b-426b-8af6-3c6d4b65f3b6",
-    linkedin: "https://linkedin.com/in/vinaysankar",
+    linkedin: "https://www.linkedin.com/in/vinay-sankar-6a157b252/",
     itchIo: "https://vinaysankar.itch.io",
     discord: "vinay_dev#4291",
     twitter: "https://twitter.com/vinaysankar_dev",

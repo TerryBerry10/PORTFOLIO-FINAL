@@ -112,3 +112,18 @@
               0 0 10px rgba(254, 240, 138, 0.8);
 }
 
+/* Ultra-Fast Hardware-Accelerated Canvas & Modals */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.hardware-accel {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+

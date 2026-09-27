@@ -84,7 +84,7 @@ export class WorldEngine {
   }
 
   public handleResize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     this.canvas.width = window.innerWidth * dpr;
     this.canvas.height = window.innerHeight * dpr;
     this.ctx.resetTransform?.();
@@ -129,12 +129,18 @@ export class WorldEngine {
     const dt = Math.min((currentTime - this.lastTime) / 1000, 0.1);
     this.lastTime = currentTime;
 
-    // Measure FPS
+    // Measure FPS & Adaptive Performance Monitor
     this.frameCount++;
     this.fpsTimer += dt;
     if (this.fpsTimer >= 0.5) {
       this.fps = Math.round((this.frameCount / this.fpsTimer));
       this.frameTime = +(dt * 1000).toFixed(1);
+      
+      // Auto-adapt if running on low-end hardware
+      if (this.fps < 45 && this.fps > 0) {
+        this.particles.setLowPerformanceMode(true);
+      }
+      
       this.frameCount = 0;
       this.fpsTimer = 0;
     }
@@ -175,7 +181,7 @@ export class WorldEngine {
     }
     
     // Full-Screen Viewport Bounds in World Coordinates
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const viewW = (this.canvas.width / dpr) / this.camera.zoom;
     const viewH = (this.canvas.height / dpr) / this.camera.zoom;
     const camLeft = this.camera.x - viewW * 0.5 - 150;
@@ -222,7 +228,7 @@ export class WorldEngine {
   }
 
   private render(currentTime: number) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const width = this.canvas.width / dpr;
     const height = this.canvas.height / dpr;
 
@@ -250,14 +256,15 @@ export class WorldEngine {
     this.ctx.scale(this.camera.zoom, this.camera.zoom);
     this.ctx.translate(-this.camera.x, -this.camera.y);
 
-    // 3. World Entities (Terrain, Paths, Lake, Landmarks, Zone Rings)
+    // 3. World Entities with Viewport Frustum Culling
     this.renderer.renderWorldEntities(
       this.ctx,
       palette,
       currentTime,
       this.currentActiveZone,
       this.weather.getWindSpeed(),
-      isRaining
+      isRaining,
+      this.camera.x
     );
 
     // 4. Render Dynamic Particles (Ember, Dust, Ripples, Leaves)

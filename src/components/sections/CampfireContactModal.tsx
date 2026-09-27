@@ -141,7 +141,7 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
                 </div>
                 <div>
                   <div className="text-[10px] font-mono text-paper-400 uppercase font-bold">LinkedIn Network</div>
-                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">linkedin.com/in/vinaysankar</div>
+                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">vinay-sankar-6a157b252</div>
                 </div>
               </div>
               <span className="text-xs font-mono text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>

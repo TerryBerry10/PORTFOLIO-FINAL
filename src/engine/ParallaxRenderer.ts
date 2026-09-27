@@ -231,16 +231,22 @@ export class ParallaxRenderer {
       const sy = s.y - camY * 0.05 + height * 0.35;
       if (sx >= -10 && sx <= width + 10 && sy >= -10 && sy <= height * 0.85) {
         const twinkle = Math.sin(time * 0.004 + s.x * 0.1) * 0.3;
-        ctx.globalAlpha = Math.max(0.35, Math.min(1.0, s.alpha + twinkle));
+        const starAlpha = Math.max(0.35, Math.min(1.0, s.alpha + twinkle));
+        ctx.globalAlpha = starAlpha;
+        
+        // Crisp star core
         ctx.fillStyle = s.color || '#ffffff';
-        if (s.size > 2.0) {
-          ctx.shadowColor = s.color || '#ffffff';
-          ctx.shadowBlur = 8;
-        }
         ctx.beginPath();
         ctx.arc(sx, sy, s.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
+
+        // Soft halo for larger bright stars without expensive shadowBlur
+        if (s.size > 2.0) {
+          ctx.globalAlpha = starAlpha * 0.35;
+          ctx.beginPath();
+          ctx.arc(sx, sy, s.size * 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     }
 
@@ -261,8 +267,6 @@ export class ParallaxRenderer {
 
       ctx.strokeStyle = grad;
       ctx.lineWidth = 2.8;
-      ctx.shadowColor = '#ffffff';
-      ctx.shadowBlur = 18;
       ctx.beginPath();
       ctx.moveTo(sx, sy);
       ctx.lineTo(tailX, tailY);
@@ -274,12 +278,12 @@ export class ParallaxRenderer {
       ctx.arc(sx, sy, 3.8, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer glow aura
-      ctx.fillStyle = 'rgba(254, 240, 138, 0.5)';
+      // Outer glow aura without shadowBlur
+      ctx.globalAlpha = star.alpha * 0.45;
+      ctx.fillStyle = '#fde047';
       ctx.beginPath();
-      ctx.arc(sx, sy, 8, 0, Math.PI * 2);
+      ctx.arc(sx, sy, 7.5, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowBlur = 0;
     }
     ctx.restore();
 
@@ -298,14 +302,11 @@ export class ParallaxRenderer {
     ctx.arc(moonX, moonY, 160, 0, Math.PI * 2);
     ctx.fill();
 
-    // Moon body
+    // Moon body with inner glow
     ctx.fillStyle = '#fef08a';
-    ctx.shadowColor = '#fef08a';
-    ctx.shadowBlur = 40;
     ctx.beginPath();
     ctx.arc(moonX, moonY, palette.sunMoonSize, 0, Math.PI * 2);
     ctx.fill();
-    ctx.shadowBlur = 0;
 
     // Soft moon crater texture
     ctx.fillStyle = 'rgba(217, 119, 6, 0.15)';
@@ -461,8 +462,12 @@ export class ParallaxRenderer {
     time: number,
     activeZoneId: ZoneId | null,
     windSpeed: number,
-    isRaining: boolean = false
+    isRaining: boolean = false,
+    camX: number = 0
   ) {
+    const cullMinX = camX - 1150;
+    const cullMaxX = camX + 1150;
+
     // 1. Painted Earth & Grassy Meadow Ground with Smooth Horizon Blending
     const groundGrad = ctx.createLinearGradient(0, 45, 0, 900);
     groundGrad.addColorStop(0, '#113824'); // Rich Ghibli dark emerald night grass
@@ -473,7 +478,7 @@ export class ParallaxRenderer {
     ctx.beginPath();
     ctx.moveTo(-1800, 1200);
     ctx.lineTo(-1800, 50);
-    for (let gx = -1800; gx <= 4200; gx += 40) {
+    for (let gx = -1800; gx <= 4200; gx += 50) {
       const gy = 45 + Math.sin(gx * 0.003) * 25 + Math.cos(gx * 0.008) * 15;
       ctx.lineTo(gx, gy);
     }
@@ -487,17 +492,20 @@ export class ParallaxRenderer {
     ctx.lineWidth = 2.0;
     ctx.beginPath();
     ctx.moveTo(-1800, 50);
-    for (let gx = -1800; gx <= 4200; gx += 40) {
+    for (let gx = -1800; gx <= 4200; gx += 50) {
       const gy = 45 + Math.sin(gx * 0.003) * 25 + Math.cos(gx * 0.008) * 15;
       ctx.lineTo(gx, gy);
     }
     ctx.stroke();
     ctx.restore();
 
-    // 1b. Lush swaying night grass blade tufts
+    // 1b. Lush swaying night grass blade tufts (Viewport Culled)
     ctx.save();
     const grassColors = ['#0f3827', '#134631', '#18593f', '#0c2e20'];
-    for (let bx = -1300; bx < 3600; bx += 40) {
+    const grassStart = Math.max(-1300, Math.floor(cullMinX / 40) * 40);
+    const grassEnd = Math.min(3600, Math.ceil(cullMaxX / 40) * 40);
+
+    for (let bx = grassStart; bx <= grassEnd; bx += 40) {
       const by = 160 + Math.sin(bx * 0.008) * 80 + (bx % 29);
       const sway = Math.sin(time * 0.002 + bx * 0.01) * 4;
       const gColor = grassColors[Math.abs(bx) % grassColors.length];
@@ -512,19 +520,19 @@ export class ParallaxRenderer {
       ctx.stroke();
     }
 
-    // Glowing Night Wildflowers (Bioluminescent florets)
+    // Glowing Night Wildflowers (Viewport Culled without shadowBlur)
     const flowerColors = ['#f472b6', '#facc15', '#38bdf8', '#c084fc', '#fef08a'];
-    for (let fx = -1200; fx < 3500; fx += 85) {
+    const flowerStart = Math.max(-1200, Math.floor(cullMinX / 85) * 85);
+    const flowerEnd = Math.min(3500, Math.ceil(cullMaxX / 85) * 85);
+
+    for (let fx = flowerStart; fx <= flowerEnd; fx += 85) {
       const fy = 150 + Math.sin(fx * 0.01) * 70 + (fx % 37);
       const fColor = flowerColors[Math.abs(fx) % flowerColors.length];
       
       ctx.fillStyle = fColor;
-      ctx.shadowColor = fColor;
-      ctx.shadowBlur = 6;
       ctx.beginPath();
       ctx.arc(fx, fy - 6, 2.2, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowBlur = 0;
     }
     ctx.restore();
 
@@ -543,7 +551,7 @@ export class ParallaxRenderer {
       ctx.beginPath();
       ctx.moveTo(-1800, 1200);
       ctx.lineTo(-1800, 50);
-      for (let gx = -1800; gx <= 4200; gx += 40) {
+      for (let gx = -1800; gx <= 4200; gx += 50) {
         const gy = 45 + Math.sin(gx * 0.003) * 25 + Math.cos(gx * 0.008) * 15;
         ctx.lineTo(gx, gy);
       }
@@ -551,9 +559,11 @@ export class ParallaxRenderer {
       ctx.closePath();
       ctx.fill();
 
-      // Fluffy undulating soft snow drifts
+      // Fluffy undulating soft snow drifts (Viewport Culled)
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      for (let sx = -1200; sx < 3800; sx += 160) {
+      const snowDriftStart = Math.max(-1200, Math.floor(cullMinX / 160) * 160);
+      const snowDriftEnd = Math.min(3800, Math.ceil(cullMaxX / 160) * 160);
+      for (let sx = snowDriftStart; sx <= snowDriftEnd; sx += 160) {
         ctx.beginPath();
         ctx.ellipse(sx, 160 + Math.sin(sx * 0.01) * 50, 120, 24, 0, 0, Math.PI * 2);
         ctx.fill();
@@ -577,7 +587,7 @@ export class ParallaxRenderer {
       ctx.beginPath();
       ctx.moveTo(-1800, 1200);
       ctx.lineTo(-1800, 50);
-      for (let gx = -1800; gx <= 4200; gx += 40) {
+      for (let gx = -1800; gx <= 4200; gx += 50) {
         const gy = 45 + Math.sin(gx * 0.003) * 25 + Math.cos(gx * 0.008) * 15;
         ctx.lineTo(gx, gy);
       }
@@ -585,17 +595,12 @@ export class ParallaxRenderer {
       ctx.closePath();
       ctx.fill();
 
-      // Soft undulating petal drifts
-      ctx.fillStyle = 'rgba(251, 207, 232, 0.65)';
-      for (let sx = -1200; sx < 3800; sx += 140) {
-        ctx.beginPath();
-        ctx.ellipse(sx, 150 + Math.sin(sx * 0.01) * 50, 110, 20, 0, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Dense carpet of individual fallen petals scattered across the terrain
+      // Dense carpet of individual fallen petals scattered across the terrain (Viewport Culled)
       const petalColors = ['#f472b6', '#fbcfe8', '#fda4af', '#fecdd3', '#ffffff', '#fb7185'];
-      for (let px = -1400; px < 4000; px += 24) {
+      const petalStart = Math.max(-1400, Math.floor(cullMinX / 30) * 30);
+      const petalEnd = Math.min(4000, Math.ceil(cullMaxX / 30) * 30);
+
+      for (let px = petalStart; px <= petalEnd; px += 30) {
         const py = 140 + Math.sin(px * 0.007) * 75 + Math.cos(px * 0.024) * 35;
         const rot = (px * 0.17) % (Math.PI * 2);
         const pColor = petalColors[Math.abs(Math.floor(px * 3.7)) % petalColors.length];
@@ -612,25 +617,43 @@ export class ParallaxRenderer {
       ctx.restore();
     }
 
-    // 3. Western Scenery: Pine Forest, Rustic Windmill, Torii Gate & Lanterns
-    this.drawWesternScenery(ctx, palette, time);
+    // 3. Western Scenery (Culled)
+    if (cullMaxX >= -950 && cullMinX <= 0) {
+      this.drawWesternScenery(ctx, palette, time);
+    }
 
     // 4. Cobblestone Path connecting all zones
     this.drawCobblestonePath(ctx);
 
-    // 5. Moon Lake Water Body & Shimmer
-    this.drawMoonLake(ctx, palette, time);
+    // 5. Moon Lake Water Body & Shimmer (Culled)
+    if (cullMaxX >= 2550 && cullMinX <= 3100) {
+      this.drawMoonLake(ctx, palette, time);
+    }
 
-    // 6. Floating Sky Island & Wind Stream
-    this.drawSkyIsland(ctx, palette, time);
+    // 6. Floating Sky Island & Wind Stream (Culled)
+    if (cullMaxX >= 1550 && cullMinX <= 2050) {
+      this.drawSkyIsland(ctx, palette, time);
+    }
 
-    // 7. Zone Structures & Landmarks (with dynamic snow & sakura petal caps!)
-    this.drawHomeCottage(ctx, palette, time);
-    this.drawGameWorkshop(ctx, palette, time);
-    this.drawWhisperingForest(ctx, palette, time, windSpeed);
-    this.drawAncientTree(ctx, palette, time);
-    this.drawExperimentLab(ctx, palette, time);
-    this.drawCampfire(ctx, palette, time, isRaining);
+    // 7. Zone Structures & Landmarks (Frustum Culled for High FPS)
+    if (cullMaxX >= -80 && cullMinX <= 320) {
+      this.drawHomeCottage(ctx, palette, time);
+    }
+    if (cullMaxX >= 550 && cullMinX <= 950) {
+      this.drawGameWorkshop(ctx, palette, time);
+    }
+    if (cullMaxX >= 1050 && cullMinX <= 1700) {
+      this.drawWhisperingForest(ctx, palette, time, windSpeed);
+    }
+    if (cullMaxX >= 1950 && cullMinX <= 2350) {
+      this.drawAncientTree(ctx, palette, time);
+    }
+    if (cullMaxX >= 2250 && cullMinX <= 2550) {
+      this.drawExperimentLab(ctx, palette, time);
+    }
+    if (cullMaxX >= 180 && cullMinX <= 520) {
+      this.drawCampfire(ctx, palette, time, isRaining);
+    }
 
     // 8. Interactive Zone Indicators
     this.drawZoneTriggers(ctx, activeZoneId, palette, time);
@@ -745,10 +768,7 @@ export class ParallaxRenderer {
 
       // Glowing Amber Lantern Core
       ctx.fillStyle = '#fef08a';
-      ctx.shadowColor = '#facc15';
-      ctx.shadowBlur = 12;
       ctx.fillRect(lx - 4, -22, 8, 5);
-      ctx.shadowBlur = 0;
 
       // Lantern roof
       ctx.fillStyle = '#475569';
@@ -789,11 +809,8 @@ export class ParallaxRenderer {
 
     // Warm Glowing Lattice Windows
     ctx.fillStyle = '#fef08a';
-    ctx.shadowColor = '#facc15';
-    ctx.shadowBlur = 10;
     ctx.fillRect(-6, -45, 12, 14);
     ctx.fillRect(-5, -75, 10, 12);
-    ctx.shadowBlur = 0;
 
     // Windmill Conical Cap Roof
     ctx.fillStyle = '#991b1b';
@@ -1208,8 +1225,6 @@ export class ParallaxRenderer {
       ctx.save();
       ctx.translate(d.x, -50 + hoverY);
       ctx.fillStyle = d.color;
-      ctx.shadowColor = d.color;
-      ctx.shadowBlur = 12;
 
       if (d.shape === 'blade') {
         ctx.beginPath();
@@ -1289,8 +1304,6 @@ export class ParallaxRenderer {
     ctx.fill();
 
     ctx.fillStyle = '#a8d5ba';
-    ctx.shadowColor = '#a8d5ba';
-    ctx.shadowBlur = 18;
     ctx.beginPath();
     ctx.moveTo(0, -55 + crystalHover);
     ctx.lineTo(12, -40 + crystalHover);
@@ -1342,8 +1355,6 @@ export class ParallaxRenderer {
     // Carved Glowing Milestones on trunk
     const isNight = palette.starAlpha > 0.5;
     ctx.fillStyle = isNight ? '#e5b76b' : '#a3c2b0';
-    ctx.shadowColor = isNight ? '#e5b76b' : 'transparent';
-    ctx.shadowBlur = 8;
     for (let r = 0; r < 4; r++) {
       ctx.fillRect(-6, -75 + r * 14, 12, 4);
     }
@@ -1519,8 +1530,6 @@ export class ParallaxRenderer {
 
       // Dark glass container with gold border
       ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-      ctx.shadowColor = 'rgba(250, 204, 21, 0.5)';
-      ctx.shadowBlur = 12;
       ctx.beginPath();
       ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 13);
       ctx.fill();
@@ -1528,7 +1537,6 @@ export class ParallaxRenderer {
       ctx.strokeStyle = '#facc15';
       ctx.lineWidth = 1.4;
       ctx.stroke();
-      ctx.shadowBlur = 0;
 
       // Little indicator arrow pointing down to the house
       ctx.fillStyle = '#facc15';
