@@ -11,7 +11,8 @@ export interface Billboard {
   /** Poster accent colors [top, bottom]. */
   colors: [string, string];
   motif: BillboardMotif;
-  /** Sky lane: starting world X, cruising altitude (world Y, above the horizon) and drift speed (+ right, - left). */
+  /** Sky lane: starting world X, cruising altitude (world Y, above the horizon) and drift speed (+ right, - left).
+   *  All ships share one wind (same speed/direction) and are evenly spaced so banners never overlap. */
   startX: number;
   altitude: number;
   speed: number;
@@ -37,9 +38,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#f472b6', '#4c1d95'],
     motif: 'spark',
-    startX: -40,
-    altitude: -95,
-    speed: 16,
+    startX: 180,
+    altitude: -90,
+    speed: 14,
     projectId: 'dottie',
   },
   {
@@ -50,9 +51,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#38bdf8', '#0c3b2e'],
     motif: 'waves',
-    startX: 1500,
-    altitude: -50,
-    speed: -12,
+    startX: -760,
+    altitude: -70,
+    speed: 14,
     projectId: 'bait',
   },
   {
@@ -63,9 +64,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#facc15', '#1e1b4b'],
     motif: 'stars',
-    startX: 2600,
-    altitude: -115,
-    speed: 10,
+    startX: 1120,
+    altitude: -100,
+    speed: 14,
     projectId: 'astral-rally',
   },
   {
@@ -76,9 +77,9 @@ export const billboards: Billboard[] = [
     ribbon: 'COMING SOON',
     colors: ['#fb923c', '#3b0d0d'],
     motif: 'moon',
-    startX: 2050,
-    altitude: -35,
-    speed: -9,
+    startX: 2060,
+    altitude: -65,
+    speed: 14,
     description: 'A new game is being forged in the workshop. Details are under wraps for now — stop by the campfire to follow along.',
     platform: 'WebGL · Android',
     progress: 0.35,
@@ -91,9 +92,9 @@ export const billboards: Billboard[] = [
     ribbon: 'IN DEVELOPMENT',
     colors: ['#a78bfa', '#0f172a'],
     motif: 'mountains',
-    startX: 3100,
-    altitude: -75,
-    speed: 13,
+    startX: 3000,
+    altitude: -85,
+    speed: 14,
     description: 'An early prototype exploring new mechanics and a fresh art direction.',
     platform: 'TBA',
     progress: 0.15,

@@ -6,6 +6,7 @@ const BANNER_H = 46;
 const BANNER_SCALE = 2; // cached cloth texture resolution
 const STRIPS = 15; // vertical slices used to ripple the banner
 const ROPE_GAP = 26; // horizontal distance between the ship's tail and the banner
+const SHIP_SCALE = 1.35; // overall size of ship + banner in the world
 const WORLD_MIN_X = -1100;
 const WORLD_MAX_X = 3600;
 
@@ -22,6 +23,8 @@ interface Airship {
 export class AirshipRenderer {
   private ships: Airship[];
   private clothCache = new Map<string, HTMLCanvasElement>();
+  /** Banner currently under the mouse (highlighted with a click hint). */
+  public hoveredId: string | null = null;
 
   constructor() {
     this.ships = billboards.map(b => ({ banner: b, x: b.startX, dir: b.speed >= 0 ? 1 : -1 }));
@@ -46,13 +49,16 @@ export class AirshipRenderer {
     let bestScore = Infinity;
     for (const s of this.ships) {
       const y = this.shipY(s, time);
+      // Undo the ship scale so the checks below work in unscaled ship space.
+      const px = s.x + (wx - s.x) / SHIP_SCALE;
+      const py = y + (wy - y) / SHIP_SCALE;
       const bannerLeft = s.dir > 0 ? s.x - 78 - ROPE_GAP - BANNER_W : s.x + 78 + ROPE_GAP;
-      const onBanner = wx >= bannerLeft - 6 && wx <= bannerLeft + BANNER_W + 6 && wy >= y - 14 && wy <= y + BANNER_H + 4;
-      const onShip = Math.abs(wx - s.x) <= 72 && wy >= y - 24 && wy <= y + 42;
+      const onBanner = px >= bannerLeft - 6 && px <= bannerLeft + BANNER_W + 6 && py >= y - 14 && py <= y + BANNER_H + 4;
+      const onShip = Math.abs(px - s.x) <= 72 && py >= y - 24 && py <= y + 42;
       if (!onBanner && !onShip) continue;
       const cx = onBanner ? bannerLeft + BANNER_W / 2 : s.x;
       const cy = onBanner ? y + BANNER_H / 2 - 6 : y + 8;
-      const score = Math.hypot(wx - cx, wy - cy) + (onBanner ? 0 : 1000);
+      const score = Math.hypot(px - cx, py - cy) + (onBanner ? 0 : 1000);
       if (score < bestScore) {
         bestScore = score;
         best = s.banner;
@@ -66,9 +72,31 @@ export class AirshipRenderer {
     for (const s of this.ships) {
       if (s.x < camX - 1350 || s.x > camX + 1350) continue;
       const y = this.shipY(s, time);
-      this.drawBanner(ctx, s, y, time);
+      const hovered = s.banner.id === this.hoveredId;
+      ctx.save();
+      ctx.translate(s.x, y);
+      ctx.scale(SHIP_SCALE, SHIP_SCALE);
+      ctx.translate(-s.x, -y);
+      this.drawTrail(ctx, s, y, time);
+      this.drawBanner(ctx, s, y, time, isNight, hovered);
       this.drawShip(ctx, s, y, time, isNight);
+      ctx.restore();
     }
+  }
+
+  /** Twinkling stardust left behind the propeller. */
+  private drawTrail(ctx: CanvasRenderingContext2D, s: Airship, y: number, time: number) {
+    const [accent] = s.banner.colors;
+    ctx.fillStyle = accent;
+    for (let i = 0; i < 10; i++) {
+      const back = 34 + i * 11;
+      const tx = s.x - s.dir * (back + 40);
+      const ty = y + 34 + Math.sin(time * 0.004 + i * 1.3) * 4;
+      ctx.globalAlpha = (1 - i / 10) * (0.45 + 0.35 * Math.sin(time * 0.012 + i * 2.1));
+      const r = 1.8 - i * 0.12;
+      ctx.fillRect(tx - r, ty - r, r * 2, r * 2);
+    }
+    ctx.globalAlpha = 1;
   }
 
   private shipY(s: Airship, time: number) {
@@ -177,7 +205,7 @@ export class AirshipRenderer {
     ctx.restore();
   }
 
-  private drawBanner(ctx: CanvasRenderingContext2D, s: Airship, y: number, time: number) {
+  private drawBanner(ctx: CanvasRenderingContext2D, s: Airship, y: number, time: number, isNight: boolean, hovered: boolean) {
     const cloth = this.clothCache.get(s.banner.id);
     if (!cloth) return;
 
@@ -207,6 +235,24 @@ export class AirshipRenderer {
     ctx.quadraticCurveTo((tailX + leadX) / 2, tailY + 22, leadX, top + BANNER_H + leadWave);
     ctx.stroke();
 
+    // Warm lantern halo behind the cloth so it reads against the night sky
+    const pulse = 0.5 + 0.5 * Math.sin(time * 0.003 + s.banner.startX);
+    const haloA = (isNight ? 0.22 : 0.12) + pulse * 0.08 + (hovered ? 0.2 : 0);
+    const cx = left + BANNER_W / 2;
+    const cy = top + BANNER_H / 2;
+    const haloR = BANNER_W * 0.78;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(1, 0.62);
+    const halo = ctx.createRadialGradient(0, 0, BANNER_H * 0.3, 0, 0, haloR);
+    halo.addColorStop(0, `rgba(253, 214, 120, ${haloA})`);
+    halo.addColorStop(1, 'rgba(253, 214, 120, 0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(0, 0, haloR, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
     // Cloth strips with soft shading on the folds
     for (let i = 0; i < STRIPS; i++) {
       const off = waveAt(i);
@@ -217,6 +263,46 @@ export class AirshipRenderer {
         ctx.fillStyle = `rgba(30, 18, 10, ${Math.min(0.22, slope * 0.06)})`;
         ctx.fillRect(dx, top + off, stripW + 0.6, BANNER_H);
       }
+    }
+
+    // Fairy lights strung along the top hem
+    for (let i = 0; i <= STRIPS; i += 1) {
+      const lx = left + i * stripW;
+      const ly = top + waveAt(Math.min(STRIPS - 1, i)) - 1;
+      const twinkle = 0.55 + 0.45 * Math.sin(time * 0.008 + i * 1.7 + s.banner.startX);
+      ctx.fillStyle = `rgba(253, 230, 138, ${0.25 * twinkle})`;
+      ctx.beginPath();
+      ctx.arc(lx, ly, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = i % 3 === 0 ? s.banner.colors[0] : '#fde68a';
+      ctx.globalAlpha = 0.6 + 0.4 * twinkle;
+      ctx.beginPath();
+      ctx.arc(lx, ly, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // Hover: gold outline + click hint above the banner
+    if (hovered) {
+      ctx.strokeStyle = '#facc15';
+      ctx.lineWidth = 1.6;
+      ctx.strokeRect(left - 2, top - 3, BANNER_W + 4, BANNER_H + 6);
+      const label = s.banner.kind === 'released' ? '▶ CLICK TO PLAY' : '✦ SNEAK PEEK';
+      ctx.font = 'bold 8px "JetBrains Mono", monospace';
+      const lw = ctx.measureText(label).width + 14;
+      const lx = left + BANNER_W / 2 - lw / 2;
+      const ly = top + BANNER_H + 8;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+      ctx.beginPath();
+      ctx.roundRect(lx, ly, lw, 15, 7.5);
+      ctx.fill();
+      ctx.strokeStyle = '#facc15';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.fillStyle = '#facc15';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, lx + lw / 2, ly + 8);
     }
   }
 

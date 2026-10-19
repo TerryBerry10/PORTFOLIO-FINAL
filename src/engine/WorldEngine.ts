@@ -86,6 +86,11 @@ export class WorldEngine {
   }
 
   public setScreenMouse(screenX: number, screenY: number) {
+    const hoverX = (screenX - window.innerWidth * 0.5) / this.camera.zoom + this.camera.x;
+    const hoverY = (screenY - window.innerHeight * 0.5) / this.camera.zoom + this.camera.y;
+    this.airships.hoveredId = this.airships.hitTest(hoverX, hoverY, performance.now())?.id ?? null;
+    this.canvas.style.cursor = this.airships.hoveredId ? 'pointer' : '';
+
     const worldX = (screenX - this.canvas.width * 0.5) / this.camera.zoom + this.camera.x;
     const worldY = (screenY - this.canvas.height * 0.5) / this.camera.zoom + this.camera.y;
     this.particles.setMousePos(worldX, worldY);
