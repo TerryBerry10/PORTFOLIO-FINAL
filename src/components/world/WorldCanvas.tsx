@@ -7,7 +7,6 @@ interface WorldCanvasProps {
   onEngineReady: (engine: WorldEngine) => void;
   onZoneChange: (zoneId: ZoneId | null) => void;
   onInteractTrigger: (zoneId: ZoneId) => void;
-  onBillboardChange?: (billboard: Billboard | null) => void;
   onBillboardInteract?: (billboard: Billboard) => void;
   timeOfDay: TimeOfDay;
   weather: WeatherType;
@@ -19,7 +18,6 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
   onEngineReady,
   onZoneChange,
   onInteractTrigger,
-  onBillboardChange,
   onBillboardInteract,
   timeOfDay,
   weather,
@@ -37,7 +35,6 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
 
     engine.onZoneChange = onZoneChange;
     engine.onInteractTrigger = onInteractTrigger;
-    engine.onBillboardChange = onBillboardChange;
     engine.onBillboardInteract = onBillboardInteract;
 
     engine.start();

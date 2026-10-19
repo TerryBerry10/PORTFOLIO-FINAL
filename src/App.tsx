@@ -141,8 +141,7 @@ export function App() {
   // Retro TV game player (opened from any PLAY button via openGameTV)
   const [tvProjectId, setTvProjectId] = useState<string | null>(null);
 
-  // Promo billboards in the world
-  const [nearBillboard, setNearBillboard] = useState<Billboard | null>(null);
+  // Promo airship banners in the sky
   const [upcomingBillboard, setUpcomingBillboard] = useState<Billboard | null>(null);
   const handleBillboardInteract = (billboard: Billboard) => {
     if (billboard.kind === 'released' && billboard.projectId) openGameTV(billboard.projectId);
@@ -228,9 +227,6 @@ export function App() {
   };
 
   const getActiveZoneLabel = () => {
-    if (!activeZoneId && nearBillboard) {
-      return nearBillboard.kind === 'released' ? `Play ${nearBillboard.title}` : 'View Upcoming';
-    }
     if (!activeZoneId || !engine) return null;
     const zone = engine.renderer.zones.find(z => z.id === activeZoneId);
     return zone?.interactLabel || 'Interact';
@@ -259,7 +255,6 @@ export function App() {
         onEngineReady={eng => setEngine(eng)}
         onZoneChange={zone => setActiveZoneId(zone)}
         onInteractTrigger={handleInteractTrigger}
-        onBillboardChange={setNearBillboard}
         onBillboardInteract={handleBillboardInteract}
         timeOfDay={timeOfDay}
         weather={weather}

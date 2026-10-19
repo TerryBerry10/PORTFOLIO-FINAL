@@ -11,9 +11,10 @@ export interface Billboard {
   /** Poster accent colors [top, bottom]. */
   colors: [string, string];
   motif: BillboardMotif;
-  /** World position of the billboard's base (between the posts). */
-  x: number;
-  y: number;
+  /** Sky lane: starting world X, cruising altitude (world Y, above the horizon) and drift speed (+ right, - left). */
+  startX: number;
+  altitude: number;
+  speed: number;
   /** Released games: project id opened on the retro TV. */
   projectId?: string;
   /** Upcoming projects: details shown in the "Coming Soon" card. */
@@ -23,7 +24,7 @@ export interface Billboard {
 }
 
 /**
- * Billboards placed along the meadow path.
+ * Promo banners towed by airships drifting across the sky.
  * Released entries reuse the project ids from projects.ts.
  * TODO(Vinay): replace the two upcoming placeholders with your real upcoming projects.
  */
@@ -36,8 +37,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#f472b6', '#4c1d95'],
     motif: 'spark',
-    x: 560,
-    y: 330,
+    startX: -40,
+    altitude: -95,
+    speed: 16,
     projectId: 'dottie',
   },
   {
@@ -48,8 +50,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#38bdf8', '#0c3b2e'],
     motif: 'waves',
-    x: 975,
-    y: 330,
+    startX: 1500,
+    altitude: -50,
+    speed: -12,
     projectId: 'bait',
   },
   {
@@ -60,8 +63,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#facc15', '#1e1b4b'],
     motif: 'stars',
-    x: 1265,
-    y: 400,
+    startX: 2600,
+    altitude: -115,
+    speed: 10,
     projectId: 'astral-rally',
   },
   {
@@ -72,8 +76,9 @@ export const billboards: Billboard[] = [
     ribbon: 'COMING SOON',
     colors: ['#fb923c', '#3b0d0d'],
     motif: 'moon',
-    x: 1810,
-    y: 95,
+    startX: 2050,
+    altitude: -35,
+    speed: -9,
     description: 'A new game is being forged in the workshop. Details are under wraps for now — stop by the campfire to follow along.',
     platform: 'WebGL · Android',
     progress: 0.35,
@@ -86,8 +91,9 @@ export const billboards: Billboard[] = [
     ribbon: 'IN DEVELOPMENT',
     colors: ['#a78bfa', '#0f172a'],
     motif: 'mountains',
-    x: 2480,
-    y: 150,
+    startX: 3100,
+    altitude: -75,
+    speed: 13,
     description: 'An early prototype exploring new mechanics and a fresh art direction.',
     platform: 'TBA',
     progress: 0.15,

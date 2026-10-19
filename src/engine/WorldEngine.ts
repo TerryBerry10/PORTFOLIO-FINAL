@@ -2,7 +2,7 @@ import { CameraState, TimeOfDay, WeatherType, WorldState, ZoneId } from '../type
 import { clamp, distance, lerp } from '../utils/math';
 import { Billboard } from '../data/billboards';
 import { AudioEngine } from './AudioEngine';
-import { BillboardRenderer } from './BillboardRenderer';
+import { AirshipRenderer } from './AirshipRenderer';
 import { DayNightCycle } from './DayNightCycle';
 import { ParallaxRenderer } from './ParallaxRenderer';
 import { ParticleSystem } from './ParticleSystem';
@@ -18,7 +18,7 @@ export class WorldEngine {
   // Subsystems
   public player: PlayerController;
   public renderer: ParallaxRenderer;
-  public billboards: BillboardRenderer;
+  public airships: AirshipRenderer;
   public particles: ParticleSystem;
   public dayNight: DayNightCycle;
   public weather: WeatherSystem;
@@ -44,11 +44,10 @@ export class WorldEngine {
   // State callbacks
   public onZoneChange?: (zoneId: ZoneId | null) => void;
   public onInteractTrigger?: (zoneId: ZoneId) => void;
-  public onBillboardChange?: (billboard: Billboard | null) => void;
   public onBillboardInteract?: (billboard: Billboard) => void;
 
   private currentActiveZone: ZoneId | null = null;
-  private currentBillboard: Billboard | null = null;
+
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -58,7 +57,7 @@ export class WorldEngine {
 
     this.player = new PlayerController(120, 180);
     this.renderer = new ParallaxRenderer();
-    this.billboards = new BillboardRenderer();
+    this.airships = new AirshipRenderer();
     this.particles = new ParticleSystem();
     this.dayNight = new DayNightCycle();
     this.weather = new WeatherSystem();
@@ -129,17 +128,14 @@ export class WorldEngine {
     if (this.currentActiveZone) {
       AudioEngine.playSfx('interact');
       this.onInteractTrigger?.(this.currentActiveZone);
-    } else if (this.currentBillboard) {
-      AudioEngine.playSfx('interact');
-      this.onBillboardInteract?.(this.currentBillboard);
     }
   }
 
-  /** Opens a billboard clicked with the mouse. Returns true if one was hit. */
+  /** Opens the promo of an airship/banner clicked or tapped. Returns true if one was hit. */
   public clickAt(screenX: number, screenY: number): boolean {
     const worldX = (screenX - window.innerWidth * 0.5) / this.camera.zoom + this.camera.x;
     const worldY = (screenY - window.innerHeight * 0.5) / this.camera.zoom + this.camera.y;
-    const hit = this.billboards.hitTest(worldX, worldY);
+    const hit = this.airships.hitTest(worldX, worldY, performance.now());
     if (!hit) return false;
     AudioEngine.playSfx('interact');
     this.onBillboardInteract?.(hit);
@@ -196,6 +192,7 @@ export class WorldEngine {
     const isBreeze = this.weather.getWeather() === 'breeze';
     this.dayNight.update(dt);
     this.renderer.update(dt, windSpeed, isSnow, isBreeze);
+    this.airships.update(dt);
 
     // Is player in water (near Moon Lake: X 2600-3000, Y 150-300)
     const isWater = distance(this.player.state.x, this.player.state.y, 2800, 220) < 170;
@@ -263,12 +260,6 @@ export class WorldEngine {
       this.onZoneChange?.(foundZone);
     }
 
-    // 5. Billboard proximity (zones take priority)
-    const nearBoard = foundZone ? null : this.billboards.findNear(this.player.state.x, this.player.state.y);
-    if (nearBoard !== this.currentBillboard) {
-      this.currentBillboard = nearBoard;
-      this.onBillboardChange?.(nearBoard);
-    }
   }
 
   private render(currentTime: number) {
@@ -300,6 +291,9 @@ export class WorldEngine {
     this.ctx.scale(this.camera.zoom, this.camera.zoom);
     this.ctx.translate(-this.camera.x, -this.camera.y);
 
+    // 2b. Promo airships drifting high above the meadow (behind world structures)
+    this.airships.render(this.ctx, palette, currentTime, this.camera.x);
+
     // 3. World Entities with Viewport Frustum Culling
     this.renderer.renderWorldEntities(
       this.ctx,
@@ -309,16 +303,6 @@ export class WorldEngine {
       this.weather.getWindSpeed(),
       isRaining,
       this.camera.x
-    );
-
-    // 3b. Game promo billboards along the path
-    this.billboards.render(
-      this.ctx,
-      palette,
-      currentTime,
-      this.camera.x,
-      this.currentBillboard?.id ?? null,
-      this.renderer.snowAccumulation
     );
 
     // 4. Render Dynamic Particles (Ember, Dust, Ripples, Leaves)
