@@ -24,7 +24,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   const handleViewGames = () => {
     AudioEngine.init();
     AudioEngine.playSfx('openModal');
-    requestFullscreen();
     onEnter();
     onViewProjects();
   };
@@ -32,7 +31,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   const handleViewResume = () => {
     AudioEngine.init();
     AudioEngine.playSfx('openModal');
-    requestFullscreen();
     onEnter();
     onViewResume?.();
   };

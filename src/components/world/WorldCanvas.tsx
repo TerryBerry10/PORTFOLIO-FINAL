@@ -8,6 +8,8 @@ interface WorldCanvasProps {
   onInteractTrigger: (zoneId: ZoneId) => void;
   timeOfDay: TimeOfDay;
   weather: WeatherType;
+  /** Freezes the world while an opaque overlay (modal, TV) covers it. */
+  paused?: boolean;
 }
 
 export const WorldCanvas: React.FC<WorldCanvasProps> = ({
@@ -15,7 +17,8 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
   onZoneChange,
   onInteractTrigger,
   timeOfDay,
-  weather
+  weather,
+  paused = false
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const engineRef = useRef<WorldEngine | null>(null);
@@ -65,6 +68,13 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
+
+  useEffect(() => {
+    const engine = engineRef.current;
+    if (!engine) return;
+    if (paused) engine.stop();
+    else engine.start();
+  }, [paused]);
 
   // Sync environmental changes to engine
   useEffect(() => {

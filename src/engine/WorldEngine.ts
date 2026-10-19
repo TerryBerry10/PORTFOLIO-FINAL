@@ -35,6 +35,8 @@ export class WorldEngine {
   public frameTime = 16.6;
   private frameCount = 0;
   private fpsTimer = 0;
+  private slowWindows = 0;
+  private renderScale = 1.5;
 
   // State callbacks
   public onZoneChange?: (zoneId: ZoneId | null) => void;
@@ -56,7 +58,7 @@ export class WorldEngine {
 
     // Automated weather progression callback
     this.weather.onWeatherChanged = (nextWeather) => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = this.getDpr();
       const viewW = (this.canvas.width / dpr) / this.camera.zoom;
       const viewH = (this.canvas.height / dpr) / this.camera.zoom;
       const camLeft = this.camera.x - viewW * 0.5 - 150;
@@ -84,15 +86,23 @@ export class WorldEngine {
   }
 
   public handleResize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    this.canvas.width = window.innerWidth * dpr;
-    this.canvas.height = window.innerHeight * dpr;
+    const dpr = this.getDpr();
+    this.canvas.width = Math.round(window.innerWidth * dpr);
+    this.canvas.height = Math.round(window.innerHeight * dpr);
     this.ctx.resetTransform?.();
   };
+
+  /** Backing-store scale; drops to 1x on hardware that can't hold 60fps. */
+  private getDpr() {
+    return Math.min(window.devicePixelRatio || 1, this.renderScale);
+  }
 
   public start() {
     if (this.animFrameId) return;
     this.lastTime = performance.now();
+    // Don't let time spent paused count against the FPS monitor.
+    this.frameCount = 0;
+    this.fpsTimer = 0;
     this.loop(this.lastTime);
   }
 
@@ -136,9 +146,15 @@ export class WorldEngine {
       this.fps = Math.round((this.frameCount / this.fpsTimer));
       this.frameTime = +(dt * 1000).toFixed(1);
       
-      // Auto-adapt if running on low-end hardware
-      if (this.fps < 45 && this.fps > 0) {
+      // Auto-adapt on low-end hardware, only after sustained slowness (not one hitch)
+      this.slowWindows = this.fps < 45 && this.fps > 0 ? this.slowWindows + 1 : 0;
+      if (this.slowWindows >= 4) {
         this.particles.setLowPerformanceMode(true);
+        if (this.renderScale > 1) {
+          this.renderScale = 1;
+          this.handleResize();
+        }
+        this.slowWindows = 0;
       }
       
       this.frameCount = 0;
@@ -181,7 +197,7 @@ export class WorldEngine {
     }
     
     // Full-Screen Viewport Bounds in World Coordinates
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = this.getDpr();
     const viewW = (this.canvas.width / dpr) / this.camera.zoom;
     const viewH = (this.canvas.height / dpr) / this.camera.zoom;
     const camLeft = this.camera.x - viewW * 0.5 - 150;
@@ -228,7 +244,7 @@ export class WorldEngine {
   }
 
   private render(currentTime: number) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = this.getDpr();
     const width = this.canvas.width / dpr;
     const height = this.canvas.height / dpr;
 

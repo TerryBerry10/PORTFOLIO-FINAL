@@ -1,35 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { WorldEngine } from './engine/WorldEngine';
 import { TimeOfDay, WeatherType, ZoneId } from './types/world';
 import { Project } from './types/project';
 import { projects } from './data/projects';
 import { AudioEngine } from './engine/AudioEngine';
-import { requestFullscreen, toggleFullscreen } from './utils/fullscreen';
+import { toggleFullscreen } from './utils/fullscreen';
 
 // World & Canvas Components
 import { WorldCanvas } from './components/world/WorldCanvas';
-import { WorldMapModal } from './components/world/WorldMapModal';
+const WorldMapModal = lazy(() => import('./components/world/WorldMapModal').then(m => ({ default: m.WorldMapModal })));
 import { TouchControls } from './components/world/TouchControls';
 
 // UI Shell Components
 import { Header } from './components/ui/Header';
 import { LoadingScreen } from './components/ui/LoadingScreen';
 import { WorldCenterHeroOverlay } from './components/ui/WorldCenterHeroOverlay';
-import { QuickViewModal } from './components/ui/QuickViewModal';
-import { RecruiterViewModal } from './components/ui/RecruiterViewModal';
-import { DevConsole } from './components/ui/DevConsole';
+const QuickViewModal = lazy(() => import('./components/ui/QuickViewModal').then(m => ({ default: m.QuickViewModal })));
+const RecruiterViewModal = lazy(() => import('./components/ui/RecruiterViewModal').then(m => ({ default: m.RecruiterViewModal })));
+const DevConsole = lazy(() => import('./components/ui/DevConsole').then(m => ({ default: m.DevConsole })));
 import { PhotoMode } from './components/ui/PhotoMode';
 
 // Portfolio Modals
-import { ProjectsGalleryModal } from './components/portfolio/ProjectsGalleryModal';
-import { ProjectBreakdownModal } from './components/portfolio/ProjectBreakdownModal';
-import { SkillsWorkshopModal } from './components/sections/SkillsWorkshopModal';
-import { JourneyTreeModal } from './components/sections/JourneyTreeModal';
-import { LabExperimentsModal } from './components/sections/LabExperimentsModal';
-import { ResumeModal } from './components/sections/ResumeModal';
-import { CampfireContactModal } from './components/sections/CampfireContactModal';
-import { MiniGamesModal } from './components/sections/MiniGamesModal';
-import { RetroTVPlayer } from './components/portfolio/RetroTVPlayer';
+const ProjectsGalleryModal = lazy(() => import('./components/portfolio/ProjectsGalleryModal').then(m => ({ default: m.ProjectsGalleryModal })));
+const ProjectBreakdownModal = lazy(() => import('./components/portfolio/ProjectBreakdownModal').then(m => ({ default: m.ProjectBreakdownModal })));
+const SkillsWorkshopModal = lazy(() => import('./components/sections/SkillsWorkshopModal').then(m => ({ default: m.SkillsWorkshopModal })));
+const JourneyTreeModal = lazy(() => import('./components/sections/JourneyTreeModal').then(m => ({ default: m.JourneyTreeModal })));
+const LabExperimentsModal = lazy(() => import('./components/sections/LabExperimentsModal').then(m => ({ default: m.LabExperimentsModal })));
+const ResumeModal = lazy(() => import('./components/sections/ResumeModal').then(m => ({ default: m.ResumeModal })));
+const CampfireContactModal = lazy(() => import('./components/sections/CampfireContactModal').then(m => ({ default: m.CampfireContactModal })));
+const MiniGamesModal = lazy(() => import('./components/sections/MiniGamesModal').then(m => ({ default: m.MiniGamesModal })));
+const RetroTVPlayer = lazy(() => import('./components/portfolio/RetroTVPlayer').then(m => ({ default: m.RetroTVPlayer })));
 import { OPEN_GAME_TV_EVENT } from './utils/gameTV';
 import { InteractiveSpiritCursor } from './components/common/InteractiveSpiritCursor';
 
@@ -114,6 +114,28 @@ export function App() {
     }
   };
 
+  // Prefetch section chunks during idle time so the first open is instant
+  useEffect(() => {
+    if (!isLoaded) return;
+    const warm = () => {
+      import('./components/portfolio/ProjectsGalleryModal');
+      import('./components/portfolio/ProjectBreakdownModal');
+      import('./components/sections/ResumeModal');
+      import('./components/ui/QuickViewModal');
+      import('./components/ui/RecruiterViewModal');
+      import('./components/portfolio/RetroTVPlayer');
+      import('./components/sections/JourneyTreeModal');
+      import('./components/sections/CampfireContactModal');
+      import('./components/sections/SkillsWorkshopModal');
+      import('./components/sections/LabExperimentsModal');
+      import('./components/sections/MiniGamesModal');
+      import('./components/world/WorldMapModal');
+    };
+    const ric = (window as any).requestIdleCallback as ((cb: () => void) => number) | undefined;
+    const id = ric ? ric(warm) : window.setTimeout(warm, 1500);
+    return () => (ric ? (window as any).cancelIdleCallback(id) : clearTimeout(id));
+  }, [isLoaded]);
+
   // Retro TV game player (opened from any PLAY button via openGameTV)
   const [tvProjectId, setTvProjectId] = useState<string | null>(null);
   useEffect(() => {
@@ -154,23 +176,6 @@ export function App() {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [activeModal, photoMode, devMode]);
-
-  // Automatic fullscreen trigger on first user gesture
-  useEffect(() => {
-    const triggerAutoFullscreen = () => {
-      requestFullscreen();
-    };
-
-    window.addEventListener('click', triggerAutoFullscreen, { once: true });
-    window.addEventListener('keydown', triggerAutoFullscreen, { once: true });
-    window.addEventListener('touchstart', triggerAutoFullscreen, { once: true });
-
-    return () => {
-      window.removeEventListener('click', triggerAutoFullscreen);
-      window.removeEventListener('keydown', triggerAutoFullscreen);
-      window.removeEventListener('touchstart', triggerAutoFullscreen);
-    };
-  }, []);
 
   // Periodic Telemetry sync
   useEffect(() => {
@@ -243,6 +248,7 @@ export function App() {
         onInteractTrigger={handleInteractTrigger}
         timeOfDay={timeOfDay}
         weather={weather}
+        paused={!!activeModal || !!tvProjectId}
       />
 
       {/* 3. Global Header UI */}
@@ -286,6 +292,7 @@ export function App() {
         />
       )}
 
+      <Suspense fallback={null}>
       {/* 9. Developer Mode Telemetry Overlay */}
       {devMode && engine && (
         <DevConsole
@@ -386,6 +393,8 @@ export function App() {
           onClose={() => setTvProjectId(null)}
         />
       )}
+
+      </Suspense>
 
       {/* Interactive Ghibli Spirit Firefly Cursor with trailing stardust */}
       <InteractiveSpiritCursor />
