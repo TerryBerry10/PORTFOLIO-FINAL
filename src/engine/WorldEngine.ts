@@ -1,6 +1,8 @@
 import { CameraState, TimeOfDay, WeatherType, WorldState, ZoneId } from '../types/world';
 import { clamp, distance, lerp } from '../utils/math';
+import { Billboard } from '../data/billboards';
 import { AudioEngine } from './AudioEngine';
+import { BillboardRenderer } from './BillboardRenderer';
 import { DayNightCycle } from './DayNightCycle';
 import { ParallaxRenderer } from './ParallaxRenderer';
 import { ParticleSystem } from './ParticleSystem';
@@ -16,6 +18,7 @@ export class WorldEngine {
   // Subsystems
   public player: PlayerController;
   public renderer: ParallaxRenderer;
+  public billboards: BillboardRenderer;
   public particles: ParticleSystem;
   public dayNight: DayNightCycle;
   public weather: WeatherSystem;
@@ -41,8 +44,11 @@ export class WorldEngine {
   // State callbacks
   public onZoneChange?: (zoneId: ZoneId | null) => void;
   public onInteractTrigger?: (zoneId: ZoneId) => void;
+  public onBillboardChange?: (billboard: Billboard | null) => void;
+  public onBillboardInteract?: (billboard: Billboard) => void;
 
   private currentActiveZone: ZoneId | null = null;
+  private currentBillboard: Billboard | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -52,6 +58,7 @@ export class WorldEngine {
 
     this.player = new PlayerController(120, 180);
     this.renderer = new ParallaxRenderer();
+    this.billboards = new BillboardRenderer();
     this.particles = new ParticleSystem();
     this.dayNight = new DayNightCycle();
     this.weather = new WeatherSystem();
@@ -122,7 +129,21 @@ export class WorldEngine {
     if (this.currentActiveZone) {
       AudioEngine.playSfx('interact');
       this.onInteractTrigger?.(this.currentActiveZone);
+    } else if (this.currentBillboard) {
+      AudioEngine.playSfx('interact');
+      this.onBillboardInteract?.(this.currentBillboard);
     }
+  }
+
+  /** Opens a billboard clicked with the mouse. Returns true if one was hit. */
+  public clickAt(screenX: number, screenY: number): boolean {
+    const worldX = (screenX - window.innerWidth * 0.5) / this.camera.zoom + this.camera.x;
+    const worldY = (screenY - window.innerHeight * 0.5) / this.camera.zoom + this.camera.y;
+    const hit = this.billboards.hitTest(worldX, worldY);
+    if (!hit) return false;
+    AudioEngine.playSfx('interact');
+    this.onBillboardInteract?.(hit);
+    return true;
   }
 
   public fastTravelToZone(zoneId: ZoneId) {
@@ -241,6 +262,13 @@ export class WorldEngine {
       this.player.state.activeZone = foundZone;
       this.onZoneChange?.(foundZone);
     }
+
+    // 5. Billboard proximity (zones take priority)
+    const nearBoard = foundZone ? null : this.billboards.findNear(this.player.state.x, this.player.state.y);
+    if (nearBoard !== this.currentBillboard) {
+      this.currentBillboard = nearBoard;
+      this.onBillboardChange?.(nearBoard);
+    }
   }
 
   private render(currentTime: number) {
@@ -281,6 +309,16 @@ export class WorldEngine {
       this.weather.getWindSpeed(),
       isRaining,
       this.camera.x
+    );
+
+    // 3b. Game promo billboards along the path
+    this.billboards.render(
+      this.ctx,
+      palette,
+      currentTime,
+      this.camera.x,
+      this.currentBillboard?.id ?? null,
+      this.renderer.snowAccumulation
     );
 
     // 4. Render Dynamic Particles (Ember, Dust, Ripples, Leaves)

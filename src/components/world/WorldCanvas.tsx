@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { WorldEngine } from '../../engine/WorldEngine';
 import { TimeOfDay, WeatherType, ZoneId } from '../../types/world';
+import { Billboard } from '../../data/billboards';
 
 interface WorldCanvasProps {
   onEngineReady: (engine: WorldEngine) => void;
   onZoneChange: (zoneId: ZoneId | null) => void;
   onInteractTrigger: (zoneId: ZoneId) => void;
+  onBillboardChange?: (billboard: Billboard | null) => void;
+  onBillboardInteract?: (billboard: Billboard) => void;
   timeOfDay: TimeOfDay;
   weather: WeatherType;
   /** Freezes the world while an opaque overlay (modal, TV) covers it. */
@@ -16,6 +19,8 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
   onEngineReady,
   onZoneChange,
   onInteractTrigger,
+  onBillboardChange,
+  onBillboardInteract,
   timeOfDay,
   weather,
   paused = false
@@ -32,6 +37,8 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
 
     engine.onZoneChange = onZoneChange;
     engine.onInteractTrigger = onInteractTrigger;
+    engine.onBillboardChange = onBillboardChange;
+    engine.onBillboardInteract = onBillboardInteract;
 
     engine.start();
     onEngineReady(engine);
@@ -107,6 +114,7 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
   return (
     <canvas
       ref={canvasRef}
+      onClick={e => engineRef.current?.clickAt(e.clientX, e.clientY)}
       className="fixed inset-0 w-full h-full block bg-[#020408] touch-none z-0"
     />
   );

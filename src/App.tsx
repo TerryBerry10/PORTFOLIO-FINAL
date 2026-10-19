@@ -30,7 +30,9 @@ const ResumeModal = lazy(() => import('./components/sections/ResumeModal').then(
 const CampfireContactModal = lazy(() => import('./components/sections/CampfireContactModal').then(m => ({ default: m.CampfireContactModal })));
 const MiniGamesModal = lazy(() => import('./components/sections/MiniGamesModal').then(m => ({ default: m.MiniGamesModal })));
 const RetroTVPlayer = lazy(() => import('./components/portfolio/RetroTVPlayer').then(m => ({ default: m.RetroTVPlayer })));
-import { OPEN_GAME_TV_EVENT } from './utils/gameTV';
+const UpcomingBillboardModal = lazy(() => import('./components/world/UpcomingBillboardModal').then(m => ({ default: m.UpcomingBillboardModal })));
+import { OPEN_GAME_TV_EVENT, openGameTV } from './utils/gameTV';
+import { Billboard } from './data/billboards';
 import { InteractiveSpiritCursor } from './components/common/InteractiveSpiritCursor';
 
 export function App() {
@@ -138,6 +140,14 @@ export function App() {
 
   // Retro TV game player (opened from any PLAY button via openGameTV)
   const [tvProjectId, setTvProjectId] = useState<string | null>(null);
+
+  // Promo billboards in the world
+  const [nearBillboard, setNearBillboard] = useState<Billboard | null>(null);
+  const [upcomingBillboard, setUpcomingBillboard] = useState<Billboard | null>(null);
+  const handleBillboardInteract = (billboard: Billboard) => {
+    if (billboard.kind === 'released' && billboard.projectId) openGameTV(billboard.projectId);
+    else setUpcomingBillboard(billboard);
+  };
   useEffect(() => {
     const onOpen = (e: Event) => setTvProjectId((e as CustomEvent<string>).detail);
     window.addEventListener(OPEN_GAME_TV_EVENT, onOpen);
@@ -218,6 +228,9 @@ export function App() {
   };
 
   const getActiveZoneLabel = () => {
+    if (!activeZoneId && nearBillboard) {
+      return nearBillboard.kind === 'released' ? `Play ${nearBillboard.title}` : 'View Upcoming';
+    }
     if (!activeZoneId || !engine) return null;
     const zone = engine.renderer.zones.find(z => z.id === activeZoneId);
     return zone?.interactLabel || 'Interact';
@@ -246,9 +259,11 @@ export function App() {
         onEngineReady={eng => setEngine(eng)}
         onZoneChange={zone => setActiveZoneId(zone)}
         onInteractTrigger={handleInteractTrigger}
+        onBillboardChange={setNearBillboard}
+        onBillboardInteract={handleBillboardInteract}
         timeOfDay={timeOfDay}
         weather={weather}
-        paused={!!activeModal || !!tvProjectId}
+        paused={!!activeModal || !!tvProjectId || !!upcomingBillboard}
       />
 
       {/* 3. Global Header UI */}
@@ -383,6 +398,17 @@ export function App() {
       {activeModal === 'minigames' && (
         <MiniGamesModal
           onClose={() => setActiveModal(null)}
+        />
+      )}
+
+      {upcomingBillboard && (
+        <UpcomingBillboardModal
+          billboard={upcomingBillboard}
+          onClose={() => setUpcomingBillboard(null)}
+          onFollow={() => {
+            setUpcomingBillboard(null);
+            setActiveModal('contact');
+          }}
         />
       )}
 
