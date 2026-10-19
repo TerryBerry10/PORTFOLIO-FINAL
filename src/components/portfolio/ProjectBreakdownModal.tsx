@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { AudioEngine } from '../../engine/AudioEngine';
+import { openGameTV } from '../../utils/gameTV';
 
 interface ProjectBreakdownModalProps {
   project: Project;
@@ -73,12 +74,13 @@ export const ProjectBreakdownModal: React.FC<ProjectBreakdownModalProps> = ({ pr
             {project.playableUrl && (
               <a
                 href={project.playableUrl}
+                onClick={e => { e.preventDefault(); openGameTV(project.id); }}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs font-black rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all cursor-pointer"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
-                <span>PLAY ↗</span>
+                <span>PLAY</span>
               </a>
             )}
             {project.repositoryUrl && (
@@ -338,11 +340,12 @@ export const ProjectBreakdownModal: React.FC<ProjectBreakdownModalProps> = ({ pr
                   {project.playableUrl && (
                     <a
                       href={project.playableUrl}
+                      onClick={e => { e.preventDefault(); openGameTV(project.id); }}
                       target="_blank"
                       rel="noreferrer"
                       className="px-6 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs font-black rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] transition-all cursor-pointer"
                     >
-                      PLAY GAME ↗
+                      PLAY GAME
                     </a>
                   )}
                 </div>

@@ -3,6 +3,7 @@ import { Project } from '../../types/project';
 import { ProjectThumbnailCanvas } from './ProjectThumbnailCanvas';
 import { Play, Sparkles } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
+import { openGameTV } from '../../utils/gameTV';
 
 interface ProjectCardProps {
   project: Project;
@@ -31,8 +32,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
     setTilt({ x: 0, y: 0 });
   };
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     AudioEngine.playSfx('interact');
+    openGameTV(project.id);
   };
 
   return (
@@ -69,7 +72,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
           rel="noreferrer"
           onClick={handlePlayClick}
           className="block relative mb-4 rounded-xl overflow-hidden shadow-lg border border-white/15 group-hover:border-gold-400/80 transition-colors"
-          title={`Play ${project.title} on Unity Play`}
+          title={`Play ${project.title} on the retro TV`}
         >
           <ProjectThumbnailCanvas type={project.id} className="h-40 sm:h-44" />
           
@@ -85,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
             <div className="px-4 py-2 rounded-xl bg-gold-500/90 text-charcoal-950 font-mono font-bold text-xs flex items-center gap-2 shadow-lg backdrop-blur-sm transform scale-95 group-hover:scale-100 transition-transform">
               <Play className="w-3.5 h-3.5 fill-current" />
-              <span>PLAY IN BROWSER</span>
+              <span>PLAY ON TV</span>
             </div>
           </div>
         </a>
@@ -133,7 +136,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
           className="w-full py-3 bg-gradient-to-r from-gold-500 to-amber-400 hover:from-gold-400 hover:to-amber-300 text-charcoal-950 font-mono text-xs font-bold rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 group-hover:scale-[1.02]"
         >
           <Play className="w-3.5 h-3.5 fill-current" />
-          <span>PLAY GAME ↗</span>
+          <span>PLAY GAME</span>
         </a>
       </div>
     </div>

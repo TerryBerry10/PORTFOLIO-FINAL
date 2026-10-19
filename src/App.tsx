@@ -29,6 +29,8 @@ import { LabExperimentsModal } from './components/sections/LabExperimentsModal';
 import { ResumeModal } from './components/sections/ResumeModal';
 import { CampfireContactModal } from './components/sections/CampfireContactModal';
 import { MiniGamesModal } from './components/sections/MiniGamesModal';
+import { RetroTVPlayer } from './components/portfolio/RetroTVPlayer';
+import { OPEN_GAME_TV_EVENT } from './utils/gameTV';
 import { InteractiveSpiritCursor } from './components/common/InteractiveSpiritCursor';
 
 export function App() {
@@ -111,6 +113,14 @@ export function App() {
       engine.camera.zoom = zoom;
     }
   };
+
+  // Retro TV game player (opened from any PLAY button via openGameTV)
+  const [tvProjectId, setTvProjectId] = useState<string | null>(null);
+  useEffect(() => {
+    const onOpen = (e: Event) => setTvProjectId((e as CustomEvent<string>).detail);
+    window.addEventListener(OPEN_GAME_TV_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_GAME_TV_EVENT, onOpen);
+  }, []);
 
   // Keyboard shortcut 'DEV' & 'ESC'
   useEffect(() => {
@@ -366,6 +376,14 @@ export function App() {
       {activeModal === 'minigames' && (
         <MiniGamesModal
           onClose={() => setActiveModal(null)}
+        />
+      )}
+
+      {tvProjectId && (
+        <RetroTVPlayer
+          key={tvProjectId}
+          projectId={tvProjectId}
+          onClose={() => setTvProjectId(null)}
         />
       )}
 

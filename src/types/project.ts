@@ -69,6 +69,10 @@ export interface Project {
   featured: boolean;
   technologies: string[];
   playableUrl?: string;
+  /** Direct iframe URL for the in-portfolio retro TV player. Derived from Unity Play URLs when omitted. */
+  embedUrl?: string;
+  /** Native orientation of the build (Android portrait games get pillarboxed on the TV). */
+  screenOrientation?: 'landscape' | 'portrait';
   repositoryUrl?: string;
   videoTrailerUrl?: string;
   dioramaTheme: 'floating_island' | 'cyber_arena' | 'galaxy_orbit' | 'mech_hangar' | 'ancient_forest';

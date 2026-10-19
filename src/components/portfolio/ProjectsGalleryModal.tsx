@@ -70,7 +70,7 @@ export const ProjectsGalleryModal: React.FC<ProjectsGalleryModalProps> = ({
           <div className="mt-8 pt-4 border-t border-white/15 flex flex-wrap items-center justify-between text-xs font-mono text-paper-300 gap-2">
             <span>All titles are playable directly in WebGL on Unity Play</span>
             <span className="text-gold-300 font-bold">
-              Click &quot;PLAY GAME ↗&quot; on any card to launch instantly
+              Click &quot;PLAY GAME&quot; on any card to switch on the retro TV
             </span>
           </div>
         </div>

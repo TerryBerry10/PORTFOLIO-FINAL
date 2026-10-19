@@ -102,7 +102,7 @@ export const InteractiveSpiritCursor: React.FC = () => {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[9999] opacity-0 select-none will-change-transform"
+      className="spirit-cursor fixed top-0 left-0 pointer-events-none z-[9999] opacity-0 select-none will-change-transform"
       style={{
         transform: 'translate3d(-100px, -100px, 0)',
         transition: 'opacity 0.15s ease',

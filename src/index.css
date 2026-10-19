@@ -127,3 +127,46 @@ canvas {
 }
 
 
+
+/* ---------- Retro TV Game Player ---------- */
+.cursor-in-game .spirit-cursor { opacity: 0 !important; }
+
+@keyframes crt-on {
+  0%   { transform: scale(0.02, 0.004); filter: brightness(8); opacity: 1; }
+  45%  { transform: scale(1, 0.006); filter: brightness(6); }
+  100% { transform: scale(1, 1); filter: brightness(1); }
+}
+@keyframes crt-off {
+  0%   { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+  55%  { transform: scale(1, 0.006); filter: brightness(6); }
+  100% { transform: scale(0, 0.004); filter: brightness(10); opacity: 0; }
+}
+@keyframes crt-flicker {
+  0%, 100% { opacity: 0.9; } 50% { opacity: 1; }
+}
+@keyframes crt-roll {
+  0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); }
+}
+@keyframes tv-drop-in {
+  0% { transform: translateY(40px) scale(0.92); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.crt-on  { animation: crt-on 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.crt-off { animation: crt-off 0.4s ease-in both; }
+.tv-drop-in { animation: tv-drop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.crt-scanlines {
+  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,0,0,0.22) 3px, transparent 4px);
+  animation: crt-flicker 0.12s infinite;
+}
+.crt-roll-bar {
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.05), transparent);
+  animation: crt-roll 6s linear infinite;
+}
+.tv-wood {
+  background:
+    repeating-linear-gradient(92deg, rgba(0,0,0,0.12) 0px, transparent 3px, rgba(255,255,255,0.03) 7px, transparent 11px),
+    linear-gradient(160deg, #7a4a26 0%, #5a3318 45%, #3f220f 100%);
+}
+.tv-grille {
+  background: repeating-linear-gradient(to bottom, #1a1009 0px, #1a1009 3px, #3b2614 3px, #3b2614 6px);
+}

@@ -3,6 +3,7 @@ import { projects } from '../../data/projects';
 import { Project } from '../../types/project';
 import { X, Gamepad2, Wrench, FileText, Mail, Sparkles, Milestone, Compass } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
+import { openGameTV } from '../../utils/gameTV';
 
 interface QuickViewModalProps {
   onClose: () => void;
@@ -145,12 +146,12 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     {p.playableUrl && (
                       <a
                         href={p.playableUrl}
+                        onClick={e => { e.preventDefault(); openGameTV(p.id); }}
                         target="_blank"
                         rel="noreferrer"
                         className="px-5 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs font-black rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all flex items-center gap-1.5 cursor-pointer"
                       >
                         <span>PLAY GAME</span>
-                        <span>↗</span>
                       </a>
                     )}
                   </div>

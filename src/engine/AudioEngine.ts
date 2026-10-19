@@ -69,6 +69,13 @@ class AudioEngineClass {
     return this.settings.isMuted;
   }
 
+  /** Silences the world soundscape while an embedded game is playing. */
+  public setDucked(ducked: boolean) {
+    if (!this.masterGain || !this.ctx) return;
+    const targetGain = ducked || this.settings.isMuted ? 0 : this.settings.masterVolume;
+    this.masterGain.gain.setTargetAtTime(targetGain, this.ctx.currentTime, 0.15);
+  }
+
   public setMasterVolume(val: number) {
     this.settings.masterVolume = Math.max(0, Math.min(1, val));
     if (this.masterGain && this.ctx && !this.settings.isMuted) {
