@@ -11,7 +11,8 @@ interface ProjectsGalleryModalProps {
 }
 
 export const ProjectsGalleryModal: React.FC<ProjectsGalleryModalProps> = ({
-  onClose
+  onClose,
+  onOpenBreakdown
 }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/20 backdrop-blur-[2px] overflow-y-auto animate-fadeIn select-none">
@@ -62,6 +63,7 @@ export const ProjectsGalleryModal: React.FC<ProjectsGalleryModalProps> = ({
                 key={project.id}
                 project={project}
                 index={i}
+                onOpenBreakdown={onOpenBreakdown}
               />
             ))}
           </div>

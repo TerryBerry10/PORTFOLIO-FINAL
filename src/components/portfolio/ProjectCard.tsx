@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Project } from '../../types/project';
 import { ProjectThumbnailCanvas } from './ProjectThumbnailCanvas';
-import { Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles, BookOpen } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
 import { openGameTV } from '../../utils/gameTV';
 
@@ -11,7 +11,7 @@ interface ProjectCardProps {
   onOpenBreakdown?: (project: Project) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, onOpenBreakdown }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -126,8 +126,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
         </div>
       </div>
 
-      {/* Action Play Button */}
-      <div className="pt-2">
+      {/* Actions: play on the TV, or read the engineering case study */}
+      <div className="pt-2 grid grid-cols-2 gap-2">
         <a
           href={project.playableUrl}
           target="_blank"
@@ -138,6 +138,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
           <Play className="w-3.5 h-3.5 fill-current" />
           <span>PLAY GAME</span>
         </a>
+        <button
+          onClick={() => {
+            AudioEngine.playSfx('openModal');
+            onOpenBreakdown?.(project);
+          }}
+          className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gold-400/70 text-white font-mono text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+        >
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>CASE STUDY</span>
+        </button>
       </div>
     </div>
   );

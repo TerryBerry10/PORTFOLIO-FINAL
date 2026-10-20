@@ -243,6 +243,7 @@ export function App() {
             setIsLoaded(true);
             setActiveModal('gallery');
           }}
+          onOpenBreakdown={handleOpenBreakdown}
           onViewResume={() => {
             setIsLoaded(true);
             setActiveModal('resume');
