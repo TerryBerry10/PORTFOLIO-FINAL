@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Sparkles, Compass } from 'lucide-react';
+import { isTouchDevice } from '../../utils/device';
 
 interface WorldCenterHeroOverlayProps {
   isVisible: boolean;
@@ -48,12 +49,33 @@ export const WorldCenterHeroOverlay: React.FC<WorldCenterHeroOverlayProps> = ({ 
       }
     };
 
+    // Touch: fade while a finger is down (joystick / taps), restore 2s after release
+    const handleTouchStart = () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      setIsTransparent(true);
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length > 0) return;
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => {
+        setIsTransparent(false);
+        timerRef.current = null;
+      }, 2000);
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
@@ -85,7 +107,11 @@ export const WorldCenterHeroOverlay: React.FC<WorldCenterHeroOverlayProps> = ({ 
         <div className="relative inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)] animate-stagger">
           <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
           <span className="font-mono text-xs sm:text-sm font-bold text-amber-200 tracking-wider uppercase">
-            Living Playable World · Use <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">WASD</span> to Move · <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">[E]</span> to Interact
+            {isTouchDevice() ? (
+              <>Living Playable World · <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">Drag</span> to Move · <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">Tap</span> Airships to Play</>
+            ) : (
+              <>Living Playable World · Use <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">WASD</span> to Move · <span className="text-white font-extrabold bg-white/15 px-2 py-0.5 rounded border border-white/20">[E]</span> to Interact</>
+            )}
           </span>
           <Compass className="w-4 h-4 text-amber-300" />
         </div>

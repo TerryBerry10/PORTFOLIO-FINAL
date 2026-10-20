@@ -91,8 +91,8 @@ export const WorldCanvas: React.FC<WorldCanvasProps> = ({
     if (engineRef.current) {
       engineRef.current.weather.setWeather(weather);
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const viewW = (window.innerWidth / dpr) / engineRef.current.camera.zoom;
-      const viewH = (window.innerHeight / dpr) / engineRef.current.camera.zoom;
+      const viewW = (window.innerWidth / dpr) / engineRef.current.viewZoom;
+      const viewH = (window.innerHeight / dpr) / engineRef.current.viewZoom;
       const camLeft = engineRef.current.camera.x - viewW * 0.5 - 150;
       const camRight = engineRef.current.camera.x + viewW * 0.5 + 150;
       const camTop = engineRef.current.camera.y - viewH * 0.5 - 150;

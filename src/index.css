@@ -170,3 +170,6 @@ canvas {
 .tv-grille {
   background: repeating-linear-gradient(to bottom, #1a1009 0px, #1a1009 3px, #3b2614 3px, #3b2614 6px);
 }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

@@ -91,8 +91,14 @@ export const RetroTVPlayer: React.FC<RetroTVPlayerProps> = ({ projectId, onClose
     setChannelIndex(i => (i + dir + channels.length) % channels.length);
   };
 
-  const goFullscreen = () => {
-    screenRef.current?.requestFullscreen?.().catch(() => {});
+  const goFullscreen = async () => {
+    try {
+      await screenRef.current?.requestFullscreen?.();
+      // Phones: turn landscape games sideways automatically (supported on Android Chrome).
+      if (!isPortrait) await (screen.orientation as any)?.lock?.('landscape');
+    } catch {
+      /* fullscreen / orientation lock not available */
+    }
   };
 
   if (!project || !embedUrl) return null;
@@ -214,6 +220,14 @@ export const RetroTVPlayer: React.FC<RetroTVPlayerProps> = ({ projectId, onClose
           <div className="w-10 h-4 rounded-b-lg bg-[#2a170a]" />
           <div className="w-10 h-4 rounded-b-lg bg-[#2a170a]" />
         </div>
+
+        {/* Phones: the TV screen is small, so point players at fullscreen */}
+        <button
+          onClick={goFullscreen}
+          className="md:hidden mt-5 px-5 py-2.5 rounded-full bg-amber-500/90 text-black font-mono text-xs font-bold flex items-center gap-2 shadow-lg active:scale-95"
+        >
+          <Maximize2 className="w-4 h-4" /> PLAY FULLSCREEN
+        </button>
       </div>
     </div>
   );

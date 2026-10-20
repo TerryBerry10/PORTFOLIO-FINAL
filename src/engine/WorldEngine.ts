@@ -65,8 +65,8 @@ export class WorldEngine {
     // Automated weather progression callback
     this.weather.onWeatherChanged = (nextWeather) => {
       const dpr = this.getDpr();
-      const viewW = (this.canvas.width / dpr) / this.camera.zoom;
-      const viewH = (this.canvas.height / dpr) / this.camera.zoom;
+      const viewW = (this.canvas.width / dpr) / this.viewZoom;
+      const viewH = (this.canvas.height / dpr) / this.viewZoom;
       const camLeft = this.camera.x - viewW * 0.5 - 150;
       const camRight = this.camera.x + viewW * 0.5 + 150;
       const camTop = this.camera.y - viewH * 0.5 - 150;
@@ -85,18 +85,26 @@ export class WorldEngine {
     window.addEventListener('resize', this.handleResize);
   }
 
+  /** Extra zoom-out on narrow screens so phones see as much of the world as a laptop. */
+  private fitZoom = 1;
+
+  /** Zoom actually used for rendering: user/photo zoom times the responsive fit. */
+  public get viewZoom() {
+    return this.camera.zoom * this.fitZoom;
+  }
+
   public setScreenMouse(screenX: number, screenY: number) {
-    const hoverX = (screenX - window.innerWidth * 0.5) / this.camera.zoom + this.camera.x;
-    const hoverY = (screenY - window.innerHeight * 0.5) / this.camera.zoom + this.camera.y;
+    const hoverX = (screenX - window.innerWidth * 0.5) / this.viewZoom + this.camera.x;
+    const hoverY = (screenY - window.innerHeight * 0.5) / this.viewZoom + this.camera.y;
     this.airships.hoveredId = this.airships.hitTest(hoverX, hoverY, performance.now())?.id ?? null;
     this.canvas.style.cursor = this.airships.hoveredId ? 'pointer' : '';
 
-    const worldX = (screenX - this.canvas.width * 0.5) / this.camera.zoom + this.camera.x;
-    const worldY = (screenY - this.canvas.height * 0.5) / this.camera.zoom + this.camera.y;
-    this.particles.setMousePos(worldX, worldY);
+    this.particles.setMousePos(hoverX, hoverY);
   }
 
   public handleResize = () => {
+    // Fit roughly 1000 world units across; never zoom out past 0.6 or in past 1.
+    this.fitZoom = Math.min(1, Math.max(0.6, window.innerWidth / 1000));
     const dpr = this.getDpr();
     this.canvas.width = Math.round(window.innerWidth * dpr);
     this.canvas.height = Math.round(window.innerHeight * dpr);
@@ -138,8 +146,8 @@ export class WorldEngine {
 
   /** Opens the promo of an airship/banner clicked or tapped. Returns true if one was hit. */
   public clickAt(screenX: number, screenY: number): boolean {
-    const worldX = (screenX - window.innerWidth * 0.5) / this.camera.zoom + this.camera.x;
-    const worldY = (screenY - window.innerHeight * 0.5) / this.camera.zoom + this.camera.y;
+    const worldX = (screenX - window.innerWidth * 0.5) / this.viewZoom + this.camera.x;
+    const worldY = (screenY - window.innerHeight * 0.5) / this.viewZoom + this.camera.y;
     const hit = this.airships.hitTest(worldX, worldY, performance.now());
     if (!hit) return false;
     AudioEngine.playSfx('interact');
@@ -221,8 +229,8 @@ export class WorldEngine {
     
     // Full-Screen Viewport Bounds in World Coordinates
     const dpr = this.getDpr();
-    const viewW = (this.canvas.width / dpr) / this.camera.zoom;
-    const viewH = (this.canvas.height / dpr) / this.camera.zoom;
+    const viewW = (this.canvas.width / dpr) / this.viewZoom;
+    const viewH = (this.canvas.height / dpr) / this.viewZoom;
     const camLeft = this.camera.x - viewW * 0.5 - 150;
     const camRight = this.camera.x + viewW * 0.5 + 150;
     const camTop = this.camera.y - viewH * 0.5 - 150;
@@ -293,7 +301,7 @@ export class WorldEngine {
     // 2. Camera Transform in World Space
     this.ctx.save();
     this.ctx.translate(width * 0.5, height * 0.5);
-    this.ctx.scale(this.camera.zoom, this.camera.zoom);
+    this.ctx.scale(this.viewZoom, this.viewZoom);
     this.ctx.translate(-this.camera.x, -this.camera.y);
 
     // 2b. Promo airships drifting high above the meadow (behind world structures)

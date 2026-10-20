@@ -2,6 +2,7 @@ import React from 'react';
 import { Compass, Gamepad2, ArrowRight, Sparkles } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
 import { requestFullscreen } from '../../utils/fullscreen';
+import { isTouchDevice } from '../../utils/device';
 
 interface LoadingScreenProps {
   onEnter: () => void;
@@ -92,10 +93,20 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
       </div>
 
       {/* Subtle Bottom Controls Hint */}
-      <div className="absolute bottom-6 font-mono text-[11px] text-paper-400/60 flex items-center gap-3">
-        <span>WASD / ARROWS TO MOVE</span>
-        <span>·</span>
-        <span>E TO INTERACT</span>
+      <div className="absolute bottom-6 inset-x-4 justify-center text-center font-mono text-[11px] text-paper-400/60 flex flex-wrap items-center gap-x-3 gap-y-1">
+        {isTouchDevice() ? (
+          <>
+            <span>DRAG TO MOVE</span>
+            <span>·</span>
+            <span>TAP AIRSHIPS TO PLAY</span>
+          </>
+        ) : (
+          <>
+            <span>WASD / ARROWS TO MOVE</span>
+            <span>·</span>
+            <span>E TO INTERACT</span>
+          </>
+        )}
       </div>
     </div>
   );
