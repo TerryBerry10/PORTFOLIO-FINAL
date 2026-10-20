@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Project } from '../../types/project';
-import { ProjectThumbnailCanvas } from './ProjectThumbnailCanvas';
+import { ProjectCover } from './ProjectCover';
 import { Play, Sparkles, BookOpen } from 'lucide-react';
 import { AudioEngine } from '../../engine/AudioEngine';
 import { openGameTV } from '../../utils/gameTV';
@@ -74,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           className="block relative mb-4 rounded-xl overflow-hidden shadow-lg border border-white/15 group-hover:border-gold-400/80 transition-colors"
           title={`Play ${project.title} on the retro TV`}
         >
-          <ProjectThumbnailCanvas type={project.id} className="h-40 sm:h-44" />
+          <ProjectCover project={project} className="h-40 sm:h-44" />
           
           {/* Top-Right FEATURED Pill */}
           {project.featured && (

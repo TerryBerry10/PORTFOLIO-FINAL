@@ -1,11 +1,13 @@
 import React from 'react';
-import { Compass, Gamepad2, ArrowRight, Sparkles, Play, BookOpen } from 'lucide-react';
+import { Compass, Gamepad2, ArrowRight, Sparkles, Play, BookOpen, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
+import { developerInfo } from '../../data/developerInfo';
 import { AudioEngine } from '../../engine/AudioEngine';
 import { requestFullscreen } from '../../utils/fullscreen';
 import { isTouchDevice } from '../../utils/device';
 import { projects } from '../../data/projects';
 import { Project } from '../../types/project';
-import { ProjectThumbnailCanvas } from '../portfolio/ProjectThumbnailCanvas';
+import { ProjectCover } from '../portfolio/ProjectCover';
 import { openGameTV } from '../../utils/gameTV';
 
 interface LoadingScreenProps {
@@ -67,7 +69,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         {/* Role Pill */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/60 border border-amber-500/40 text-amber-300 font-mono text-xs font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(245,158,11,0.25)]">
           <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-          <span>[ // GAME DEVELOPER · TECHNICAL ARTIST ]</span>
+          <span>TECHNICAL ARTIST · GAME DEVELOPER</span>
         </div>
 
         {/* Hero Title */}
@@ -80,7 +82,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
 
         {/* Description Tagline */}
         <p className="text-base sm:text-lg md:text-xl text-paper-200/90 font-sans max-w-lg leading-relaxed font-normal">
-          I build games, interactive shaders, and living playable worlds.
+          {developerInfo.tagline}
         </p>
 
         {/* Action Buttons */}
@@ -110,6 +112,19 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             <span>RESUME / CV</span>
           </button>
         </div>
+
+        {/* Direct contact, no clicking through the world */}
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-xs text-paper-300">
+          <a href={`mailto:${developerInfo.email}`} className="flex items-center gap-1.5 hover:text-amber-300 transition-colors">
+            <Mail className="w-3.5 h-3.5" /> {developerInfo.email}
+          </a>
+          <a href={developerInfo.links.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-amber-300 transition-colors">
+            <LinkedinIcon className="w-3.5 h-3.5" /> LinkedIn
+          </a>
+          <a href={developerInfo.links.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-amber-300 transition-colors">
+            <GithubIcon className="w-3.5 h-3.5" /> GitHub
+          </a>
+        </div>
       </div>
 
       {/* Featured Work: the games, visible in the first five seconds */}
@@ -128,7 +143,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
               style={{ animationDelay: `${200 + i * 90}ms` }}
             >
               <button onClick={() => handlePlay(p)} className="relative block w-full group" title={`Play ${p.title}`}>
-                <ProjectThumbnailCanvas type={p.id} className="h-32" />
+                <ProjectCover project={p} className="h-32" />
                 <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/75 border border-white/15 font-mono text-[9px] font-bold text-emerald-300 tracking-wider">
                   ● {p.status.toUpperCase()} · {p.year}
                 </span>

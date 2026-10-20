@@ -1,3 +1,12 @@
+/** Real footage of a project. Files live in public/media/<project id>/. */
+export interface ProjectMedia {
+  type: 'video' | 'image';
+  src: string;
+  caption?: string;
+  /** Still frame shown before a video plays. */
+  poster?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -18,6 +27,9 @@ export interface Project {
   videoTrailerUrl?: string;
   dioramaTheme: 'floating_island' | 'cyber_arena' | 'galaxy_orbit' | 'mech_hangar' | 'ancient_forest';
   
+  /** Gameplay clips and screenshots. The first entry is the cover; without media a generated preview is used. */
+  media?: ProjectMedia[];
+
   shortDescription: string;
   hook: string;
 

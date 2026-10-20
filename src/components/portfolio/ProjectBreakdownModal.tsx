@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Project } from '../../types/project';
-import { X, Play, ArrowLeft } from 'lucide-react';
+import { X, Play, ArrowLeft, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { AudioEngine } from '../../engine/AudioEngine';
 import { openGameTV } from '../../utils/gameTV';
-import { ProjectThumbnailCanvas } from './ProjectThumbnailCanvas';
+import { ProjectCover, MediaView } from './ProjectCover';
 
 interface ProjectBreakdownModalProps {
   project: Project;
@@ -66,7 +66,7 @@ export const ProjectBreakdownModal: React.FC<ProjectBreakdownModalProps> = ({ pr
             className="group relative block w-full rounded-2xl overflow-hidden border border-white/10 hover:border-amber-400/70 transition-colors"
             title={`Play ${project.title}`}
           >
-            <ProjectThumbnailCanvas type={project.id} className="h-48 sm:h-60" />
+            <ProjectCover project={project} className="h-48 sm:h-60" />
             <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/45 transition-colors">
               <span className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 text-black font-mono text-xs font-black shadow-lg group-hover:scale-105 transition-transform">
                 <Play className="w-4 h-4 fill-current" /> PLAY IN BROWSER
@@ -87,6 +87,18 @@ export const ProjectBreakdownModal: React.FC<ProjectBreakdownModalProps> = ({ pr
             <h2 className="text-lg font-bold">Overview</h2>
             <p className="text-sm sm:text-base text-paper-200 leading-relaxed">{caseStudy.overview}</p>
           </section>
+
+          {/* More footage */}
+          {project.media && project.media.length > 1 && (
+            <section className="grid sm:grid-cols-2 gap-3">
+              {project.media.slice(1).map(m => (
+                <figure key={m.src} className="rounded-xl overflow-hidden border border-white/10 bg-black">
+                  <MediaView media={m} controls className="aspect-video" />
+                  {m.caption && <figcaption className="px-3 py-2 text-xs text-paper-300">{m.caption}</figcaption>}
+                </figure>
+              ))}
+            </section>
+          )}
 
           {/* Contributions */}
           <section className="space-y-3">
@@ -131,13 +143,23 @@ export const ProjectBreakdownModal: React.FC<ProjectBreakdownModalProps> = ({ pr
                 <span key={t} className="px-2.5 py-1 rounded-md bg-white/10 font-mono text-[10px] font-bold">{t}</span>
               ))}
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => openGameTV(project.id)}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-mono text-xs font-black transition-colors"
               >
                 <Play className="w-3.5 h-3.5 fill-current" /> Play
               </button>
+              {project.playableUrl && (
+                <a
+                  href={project.playableUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 font-mono text-xs font-bold transition-colors"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" /> Unity Play
+                </a>
+              )}
               {project.repositoryUrl && (
                 <a
                   href={project.repositoryUrl}
