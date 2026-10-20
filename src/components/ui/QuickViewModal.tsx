@@ -79,7 +79,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               <Milestone className="w-5 h-5 text-amber-300 mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
               <div>
                 <div className="text-sm font-bold font-sans text-white group-hover:text-amber-300 transition-colors">JOURNEY TREE</div>
-                <div className="text-xs font-mono text-paper-400 mt-0.5">Shipped Game Milestones</div>
+                <div className="text-xs font-mono text-paper-400 mt-0.5">Games & education timeline</div>
               </div>
             </button>
 
@@ -112,7 +112,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               <Mail className="w-5 h-5 text-amber-400 mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
               <div>
                 <div className="text-sm font-bold font-sans text-white group-hover:text-amber-300 transition-colors">CAMPFIRE // CONTACT</div>
-                <div className="text-xs font-mono text-paper-400 mt-0.5">Email, Discord, GitHub, LinkedIn</div>
+                <div className="text-xs font-mono text-paper-400 mt-0.5">Email, GitHub, LinkedIn</div>
               </div>
             </button>
           </div>

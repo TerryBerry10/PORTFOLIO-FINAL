@@ -7,7 +7,7 @@ export interface SkillObject {
   description: string;
   whatIUseItFor: string[];
   projectsUsedIn: string[];
-  levelOfExperience: string; // e.g. "5+ Years // Production Architecture"
+  levelOfExperience: string; // short honest note, e.g. "Used on every project"
   keySpecialties: string[];
 }
 
@@ -15,11 +15,10 @@ export interface Milestone {
   id: string;
   year: string;
   title: string;
-  category: 'Genesis' | 'Architecture' | 'Game Jam' | 'Shipped Title' | 'Technical Breakthrough';
+  category: 'Education' | 'Game Jam' | 'Shipped Title';
   story: string;
   technologies: string[];
-  artifact: string; // physical rune / leaf / emblem
-  lesson: string;
+  lesson?: string;
 }
 
 export interface ExperimentItem {
@@ -49,8 +48,8 @@ export interface DeveloperProfile {
   links: {
     github: string;
     linkedin: string;
-    itchIo: string;
-    discord: string;
+    itchIo?: string;
+    discord?: string;
     unityPlay?: string;
     twitter?: string;
     youtube?: string;

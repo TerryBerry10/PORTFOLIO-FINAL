@@ -43,7 +43,7 @@ export const SkillsWorkshopModal: React.FC<SkillsWorkshopModalProps> = ({ onClos
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>// THE ARTISAN WORKSHOP · TECHNICAL SKILLS</span>
+                <span>// SKILLS</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black font-sans text-white tracking-tight">
                 Interactive Tools & Systems Matrix
@@ -104,7 +104,7 @@ export const SkillsWorkshopModal: React.FC<SkillsWorkshopModalProps> = ({ onClos
                       {selectedSkill.category}
                     </span>
                     <span className="text-xs font-mono font-bold text-amber-400">
-                      PROFICIENCY // 5+ YRS
+                      {selectedSkill.levelOfExperience}
                     </span>
                   </div>
 
@@ -149,7 +149,7 @@ export const SkillsWorkshopModal: React.FC<SkillsWorkshopModalProps> = ({ onClos
 
         {/* Footer */}
         <div className="bg-white/[0.04] border-t border-white/15 px-6 py-4 flex items-center justify-between text-xs font-mono text-paper-400">
-          <span className="text-amber-300 font-bold">VINAY SANKAR // TECHNICAL SKILLS MATRIX</span>
+          <span className="text-amber-300 font-bold">VINAY SANKAR · SKILLS</span>
           <span>UNITY & C# SPECIALIST</span>
         </div>
       </div>

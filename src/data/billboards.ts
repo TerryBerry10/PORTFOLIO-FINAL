@@ -27,7 +27,7 @@ export interface Billboard {
 /**
  * Promo banners towed by airships drifting across the sky.
  * Released entries reuse the project ids from projects.ts.
- * TODO(Vinay): replace the two upcoming placeholders with your real upcoming projects.
+ * Upcoming projects can be added with kind: 'upcoming' (they open the Coming Soon card).
  */
 export const billboards: Billboard[] = [
   {
@@ -51,7 +51,7 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#38bdf8', '#0c3b2e'],
     motif: 'waves',
-    startX: -760,
+    startX: 1747,
     altitude: -70,
     speed: 14,
     projectId: 'bait',
@@ -64,39 +64,9 @@ export const billboards: Billboard[] = [
     ribbon: 'NOW PLAYING',
     colors: ['#facc15', '#1e1b4b'],
     motif: 'stars',
-    startX: 1120,
+    startX: 3314,
     altitude: -100,
     speed: 14,
     projectId: 'astral-rally',
-  },
-  {
-    id: 'bb-upcoming-1',
-    kind: 'upcoming',
-    title: 'Project Lantern',
-    tagline: 'Next Game · In the Workshop',
-    ribbon: 'COMING SOON',
-    colors: ['#fb923c', '#3b0d0d'],
-    motif: 'moon',
-    startX: 2060,
-    altitude: -65,
-    speed: 14,
-    description: 'A new game is being forged in the workshop. Details are under wraps for now — stop by the campfire to follow along.',
-    platform: 'WebGL · Android',
-    progress: 0.35,
-  },
-  {
-    id: 'bb-upcoming-2',
-    kind: 'upcoming',
-    title: 'Untitled Project',
-    tagline: 'Prototype · Early Concept',
-    ribbon: 'IN DEVELOPMENT',
-    colors: ['#a78bfa', '#0f172a'],
-    motif: 'mountains',
-    startX: 3000,
-    altitude: -85,
-    speed: 14,
-    description: 'An early prototype exploring new mechanics and a fresh art direction.',
-    platform: 'TBA',
-    progress: 0.15,
   },
 ];

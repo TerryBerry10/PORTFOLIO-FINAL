@@ -23,6 +23,13 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
+    // No backend: hand the message to the visitor's email app, addressed to me.
+    const subject = encodeURIComponent(`Portfolio enquiry from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}
+
+${formData.name}
+${formData.email}`);
+    window.location.href = `mailto:${developerInfo.email}?subject=${subject}&body=${body}`;
     setFormSent(true);
     AudioEngine.playSfx('secretFound');
   };
@@ -41,7 +48,7 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>// THE COZY CAMPFIRE · CONTACT & COLLABORATION</span>
+                <span>// CONTACT</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black font-sans text-white tracking-tight">
                 Let&apos;s Build Something Extraordinary
@@ -152,7 +159,7 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
           <div className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-6 sm:p-7 shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <MessageSquare className="w-5 h-5 text-amber-400" />
-              <h3 className="text-base font-bold font-sans text-white">Send a Message Around the Fire</h3>
+              <h3 className="text-base font-bold font-sans text-white">Send me a message</h3>
             </div>
 
             {formSent ? (
@@ -160,9 +167,10 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
                 <div className="w-12 h-12 rounded-full bg-amber-400 text-black flex items-center justify-center mx-auto shadow-lg">
                   <Check className="w-6 h-6 stroke-[3]" />
                 </div>
-                <h4 className="text-lg font-bold text-white">Message Transmitted!</h4>
+                <h4 className="text-lg font-bold text-white">Opening your email app…</h4>
                 <p className="text-xs text-amber-200">
-                  Thank you! Vinay Sankar has received your note and will reply promptly.
+                  Your message is ready to send. If nothing opened, email me directly at{' '}
+                  <a href={`mailto:${developerInfo.email}`} className="underline">{developerInfo.email}</a>.
                 </p>
               </div>
             ) : (
@@ -225,7 +233,7 @@ export const CampfireContactModal: React.FC<CampfireContactModalProps> = ({ onCl
         {/* Footer */}
         <div className="bg-white/[0.04] border-t border-white/15 px-6 py-4 flex items-center justify-between text-xs font-mono text-paper-400">
           <span className="text-amber-300 font-bold">// BANGALORE, INDIA (UTC+5:30)</span>
-          <span>CAMPFIRE TRANSMISSION SYSTEM</span>
+          <span>OPEN TO FULL-TIME & REMOTE ROLES</span>
         </div>
       </div>
     </div>

@@ -555,7 +555,7 @@ export const LabExperimentsModal: React.FC<LabExperimentsModalProps> = ({ onClos
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-950/50 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider mb-1 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>// THE EXPERIMENT LAB · SHADERS & KINEMATICS</span>
+                <span>// LAB · SMALL EXPERIMENTS</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black font-sans text-white tracking-tight">
                 Interactive Micro-Simulations & Systems
@@ -662,8 +662,8 @@ export const LabExperimentsModal: React.FC<LabExperimentsModalProps> = ({ onClos
 
         {/* Footer */}
         <div className="bg-white/[0.03] border-t border-white/15 px-6 py-4 flex items-center justify-between text-xs font-mono text-paper-400">
-          <span className="text-cyan-400 font-bold">// VINAY SANKAR EXPERIMENT ENGINE</span>
-          <span>REAL-TIME COMPUTATIONAL EXPERIMENTS</span>
+          <span className="text-cyan-400 font-bold">// RUNS IN YOUR BROWSER</span>
+          <span>HTML5 CANVAS</span>
         </div>
       </div>
     </div>

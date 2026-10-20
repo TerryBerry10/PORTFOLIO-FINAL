@@ -4,14 +4,14 @@ export const developerInfo: DeveloperProfile = {
   name: "Vinay Sankar",
   title: "Technical Artist • Game Developer",
   handle: "vinaysankar",
-  tagline: "I build cool games, expressive shaders, and living interactive worlds.",
-  shortBio: "Technically grounded Technical Artist & Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines.",
+  tagline: "I make small, fast games and the shaders and effects that make them feel good.",
+  shortBio: "Technical artist and game developer, currently in the second year of an M.Sc. in Game Technology. I work mostly in Unity and C#, and I focus on shaders, VFX and game feel. I have released three browser-playable games, and you can play all of them on this site.",
   extendedBio: [
-    "I believe the best games live at the sweet spot between technical precision and artistic wonder. As both a game developer and technical artist, I bridge art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems.",
-    "My toolkit spans Unity (URP / 2D / 3D), Unreal Engine, Godot, C#, C++, HLSL Shader Programming, Autodesk Maya, Blender, and real-time VFX.",
-    "When I build a game, my obsession is game feel: every jump arc must be responsive, every shader must have warmth and depth, and every frame must lock at a rock-solid 60 FPS."
+    "I like the point where code meets art: the shader that makes a hit look powerful, the two frames of hitstop that make it feel powerful.",
+    "Most of my work is in Unity (URP, 2D and 3D) with C#, Shader Graph and HLSL. I also use Blender and Maya, and I write JavaScript and TypeScript. This portfolio is hand-built in React with a canvas-rendered world.",
+    "I'm looking for a technical art or gameplay role where I can keep learning from people who ship games."
   ],
-  philosophy: "The world attracts attention. The engineering earns respect. Great games are living paintings powered by clean code and tactile physics.",
+  philosophy: "Make it readable, make it feel good, then make it fast.",
   location: "Bangalore, India",
   phone: "+91 7356749187",
   portfolioUrl: "https://final-portfolio-xi-topaz.vercel.app",
@@ -21,9 +21,6 @@ export const developerInfo: DeveloperProfile = {
     github: "https://github.com/Nigatron911",
     unityPlay: "https://play.unity.com/en/user/1aa32da2-fe9b-426b-8af6-3c6d4b65f3b6",
     linkedin: "https://www.linkedin.com/in/vinay-sankar-6a157b252/",
-    itchIo: "https://vinaysankar.itch.io",
-    discord: "vinay_dev#4291",
-    twitter: "https://twitter.com/vinaysankar_dev",
   },
   resume: {
     summary: "Technically grounded Technical Artist & Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.",

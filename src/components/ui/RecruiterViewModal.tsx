@@ -99,7 +99,7 @@ export const RecruiterViewModal: React.FC<RecruiterViewModalProps> = ({
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>PRIMARY PROOF OF ABILITY // SHIPPED TITLES</span>
+                <span>RELEASED GAMES</span>
               </h2>
             </div>
 
@@ -118,7 +118,7 @@ export const RecruiterViewModal: React.FC<RecruiterViewModalProps> = ({
           <section className="bg-black/45 backdrop-blur-xl p-6 sm:p-7 rounded-2xl border border-white/15 shadow-lg">
             <h2 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-5 flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-400" />
-              <span>TECHNICAL COMPETENCY & SYSTEMS MATRIX</span>
+              <span>SKILLS</span>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -143,7 +143,7 @@ export const RecruiterViewModal: React.FC<RecruiterViewModalProps> = ({
           <section className="bg-black/45 backdrop-blur-xl p-6 sm:p-7 rounded-2xl border border-white/15 shadow-lg">
             <h2 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider mb-5 flex items-center gap-2">
               <Briefcase className="w-4 h-4 text-amber-400" />
-              <span>PRODUCTION EXPERIENCE SUMMARY</span>
+              <span>EXPERIENCE</span>
             </h2>
 
             <div className="space-y-4">

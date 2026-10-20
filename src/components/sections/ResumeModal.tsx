@@ -263,7 +263,7 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
           <div className="flex items-center gap-3">
             <span className="text-amber-400 font-bold">📄 Vinay_Sankar_Resume.pdf</span>
             <span>•</span>
-            <span>Ready for Review & Hiring</span>
+            <span>PDF</span>
           </div>
 
           <div className="flex items-center gap-3">

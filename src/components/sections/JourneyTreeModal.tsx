@@ -35,7 +35,7 @@ export const JourneyTreeModal: React.FC<JourneyTreeModalProps> = ({ onClose }) =
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-1">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>// ABOUT & SHIPPED GAMES JOURNEY</span>
+                  <span>// ABOUT · TIMELINE</span>
                 </div>
                 <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-xs font-mono text-amber-300 font-bold mb-1">
                   {journeyMilestones.length} SHIPPED GAMES
@@ -112,28 +112,25 @@ export const JourneyTreeModal: React.FC<JourneyTreeModalProps> = ({ onClose }) =
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-black font-sans text-white mb-2">{selectedMilestone.title}</h3>
-                  <div className="text-xs font-mono text-amber-300 mb-4 font-semibold">
-                    Core Artifact: {selectedMilestone.artifact}
-                  </div>
 
                   <p className="text-sm sm:text-base text-paper-200 leading-relaxed mb-6 font-sans">
                     {selectedMilestone.story}
                   </p>
 
-                  <div className="bg-black/50 border-l-4 border-amber-400 p-4 rounded-r-xl shadow-inner">
-                    <div className="text-xs font-mono uppercase tracking-wider text-amber-300 font-bold mb-1">
-                      Key Technical Takeaway:
+                  {selectedMilestone.lesson && (
+                    <div className="bg-black/50 border-l-4 border-amber-400 p-4 rounded-r-xl shadow-inner">
+                      <div className="text-xs font-mono uppercase tracking-wider text-amber-300 font-bold mb-1">
+                        What I took away
+                      </div>
+                      <div className="text-sm text-paper-100 font-sans">{selectedMilestone.lesson}</div>
                     </div>
-                    <div className="text-sm italic text-paper-100 font-sans">
-                      "{selectedMilestone.lesson}"
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                 <div className="space-y-4 pt-4 border-t border-white/10">
                   <div>
                     <div className="text-xs font-mono uppercase tracking-wider text-paper-400 mb-2">
-                      Technologies & Systems Engineered:
+                      Tools
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {selectedMilestone.technologies.map(tech => (
