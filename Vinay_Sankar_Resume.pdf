@@ -1,0 +1,826 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 11958
+>>
+stream
+0.200025 w
+0 G
+BT
+/F2 18 Tf
+20.6999999999999993 TL
+0.118 0.161 0.231 rg
+36. 795.8899999999999864 Td
+(VINAY SANKAR) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 781.8899999999999864 Td
+(GAME DEVELOPER) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.118 0.161 0.231 rg
+418.9699999999999136 795.8899999999999864 Td
+(Bangalore, India • +91 7356749187) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.118 0.251 0.686 rg
+451.8199999999999363 783.8899999999999864 Td
+(sankarvinay70@gmail.com) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.118 0.161 0.231 rg
+402.769999999999925 771.8899999999999864 Td
+(Portfolio: terryberry10.github.io/portfolio) Tj
+ET
+0.12 0.25 0.69 RG
+1.5 w
+36. 763.8899999999999864 m
+559.2799999999999727 763.8899999999999864 l
+S
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 749.8899999999999864 Td
+(PROFESSIONAL SUMMARY) Tj
+ET
+0.8 0.84 0.88 RG
+0.75 w
+36. 746.8899999999999864 m
+559.2799999999999727 746.8899999999999864 l
+S
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.161 0.231 rg
+36. 736.8899999999999864 Td
+(Game Developer with a solid foundation in Computer Applications \(BCA\) and advanced post-graduate specialization in Game Technology) Tj
+T* (\(M.Sc.\). Skilled in Unity \(URP\), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation) Tj
+T* (state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized) Tj
+T* (game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 686.8899999999999864 Td
+(TECHNICAL SKILLS & TOOLS) Tj
+ET
+0.8 0.84 0.88 RG
+0.75 w
+36. 683.8899999999999864 m
+559.2799999999999727 683.8899999999999864 l
+S
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 673.8899999999999864 Td
+(Game Engines:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+101.6250000000000142 673.8899999999999864 Td
+(Unity \(Advanced - URP / 2D / 3D\), Unreal) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 663.3899999999999864 Td
+(Engine, Godot) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 673.8899999999999864 Td
+(Programming & Scripting:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+417.6755999999999744 673.8899999999999864 Td
+(C#, C++, C, OOP, JavaScript,) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 663.3899999999999864 Td
+(HTML5) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 652.8899999999999864 Td
+(Shaders & VFX:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+102.7300000000000182 652.8899999999999864 Td
+(Unity Shader Graph, HLSL Programming,) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 642.3899999999999864 Td
+(Shuriken Particles, Combat VFX) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 652.8899999999999864 Td
+(Animation & Rigging:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+398.8905999999999494 652.8899999999999864 Td
+(Unity Mecanim Animator, Blend Trees,) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 642.3899999999999864 Td
+(Ragdoll Physics, Maya / Blender) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 631.8899999999999864 Td
+(Optimization & Profiling:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+139.5349999999999682 631.8899999999999864 Td
+(Unity Profiler, Frame Debugger,) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+36. 621.3899999999999864 Td
+(Object Pooling, Overdraw Control) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 631.8899999999999864 Td
+(Tools & Version Control:) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+410.6205999999999676 631.8899999999999864 Td
+(Git, GitHub, Autodesk Maya,) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+308.1055999999999813 621.3899999999999864 Td
+(Blender) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 606.8899999999999864 Td
+(FEATURED GAME PROJECTS) Tj
+ET
+0.8 0.84 0.88 RG
+0.75 w
+36. 603.8899999999999864 m
+559.2799999999999727 603.8899999999999864 l
+S
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.161 0.231 rg
+36. 593.8899999999999864 Td
+(Dottie — 2D Anime-Style 1v1 Combat Game \(Unity / C#\)) Tj
+ET
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.251 0.686 rg
+495.4799999999999613 593.8899999999999864 Td
+(Solo Developer) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 583.3899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 583.3899999999999864 Td
+(Custom Shaders & Visual Juice:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+175.5579999999999927 583.3899999999999864 Td
+(Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 573.8899999999999864 Td
+(motion trails, and distortion effects inspired by anime fighters.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 563.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 563.8899999999999864 Td
+(Combat Feel & Game Feedback:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+175.8040000000000305 563.8899999999999864 Td
+(Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 554.3899999999999864 Td
+(\(screen shake, hitstop freeze-frames, hit sparks, physics knockback\).) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 544.3899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 544.3899999999999864 Td
+(Performance Optimization:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+155.4679999999999609 544.3899999999999864 Td
+(Built a modular C# Object Pooling architecture for high-frequency hit particles and projectiles, eliminating) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 534.8899999999999864 Td
+(garbage collection spikes and ensuring smooth 60 FPS gameplay.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 524.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 524.8899999999999864 Td
+(Full-Cycle Execution:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+133.9839999999999804 524.8899999999999864 Td
+(Solo developed all gameplay programming, animation states, custom shaders, and particle systems from scratch.) Tj
+ET
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.161 0.231 rg
+36. 512.8899999999999864 Td
+(Astral Rally — Fast-Paced Multi-Ball Arcade Game \(Unity / C#\)) Tj
+ET
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.251 0.686 rg
+462.7439999999999145 512.8899999999999864 Td
+(Gameplay Programmer) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 502.3899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 502.3899999999999864 Td
+(Shader & Arena Visuals:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+145.1359999999999957 502.3899999999999864 Td
+(Authored dynamic glowing neon shaders and reactive boundary collision materials that respond visually to) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 492.8899999999999864 Td
+(high-velocity ball impacts.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 482.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 482.8899999999999864 Td
+(VFX & Motion Trails:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+129.4739999999999895 482.8899999999999864 Td
+(Created procedural particle bursts and custom trail renderers to ensure high visual clarity during chaotic multi-ball) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 473.3899999999999864 Td
+(gameplay.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 463.3899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 463.3899999999999864 Td
+(Physics & Mechanics:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+136.6080000000000041 463.3899999999999864 Td
+(Implemented responsive paddle controls, multi-ball trajectory math, and collision detection in C#.) Tj
+ET
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.161 0.231 rg
+36. 451.3899999999999864 Td
+(Bait — Reverse-Snake Survival Game \(Unity / C#\)) Tj
+ET
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.251 0.686 rg
+507.0960000000000036 451.3899999999999864 Td
+(Programmer) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 440.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 440.8899999999999864 Td
+(Visual Indicators & Shaders:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+161.7000000000000171 440.8899999999999864 Td
+(Built custom trail shaders and danger-zone visual cues highlighting predator snake proximity.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 430.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 430.8899999999999864 Td
+(Particle Feedback & Feel:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+149.8100000000000023 430.8899999999999864 Td
+(Designed lightweight particle burst systems triggered upon near-misses and capture events.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 420.8899999999999864 Td
+(• ) Tj
+ET
+BT
+/F2 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+48. 420.8899999999999864 Td
+(AI & Movement Logic:) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+136.853999999999985 420.8899999999999864 Td
+(Programmed predator pursuit algorithms and fluid player navigation mechanics in Unity.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 408.8899999999999864 Td
+(FREELANCE EXPERIENCE) Tj
+ET
+0.8 0.84 0.88 RG
+0.75 w
+36. 405.8899999999999864 m
+559.2799999999999727 405.8899999999999864 l
+S
+BT
+/F2 8.8 Tf
+10.1199999999999992 TL
+0.118 0.161 0.231 rg
+36. 395.8899999999999864 Td
+(Freelance Web & Application Developer) Tj
+ET
+BT
+/F1 8.8 Tf
+10.1199999999999992 TL
+0.118 0.251 0.686 rg
+495.7439999999999714 395.8899999999999864 Td
+(Bangalore, India) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 385.8899999999999864 Td
+(• Built and deployed custom web applications and interactive interfaces using JavaScript and HTML5.) Tj
+ET
+BT
+/F1 8.2 Tf
+9.4299999999999979 TL
+0.118 0.161 0.231 rg
+40. 375.8899999999999864 Td
+(• Translated client specifications into clean, modular code with responsive UI and optimized assets.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.118 0.251 0.686 rg
+36. 363.8899999999999864 Td
+(EDUCATION) Tj
+ET
+0.8 0.84 0.88 RG
+0.75 w
+36. 360.8899999999999864 m
+559.2799999999999727 360.8899999999999864 l
+S
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.161 0.231 rg
+36. 350.8899999999999864 Td
+(M.Sc. in Game Technology) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.161 0.231 rg
+137.9800000000000182 350.8899999999999864 Td
+( • ICAT Design & Media College \(Alagappa University\)) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+421.7499999999999432 350.8899999999999864 Td
+(2nd Year \(Pursuing\) • Chennai, India) Tj
+ET
+BT
+/F2 8.5 Tf
+9.7749999999999986 TL
+0.118 0.161 0.231 rg
+36. 338.8899999999999864 Td
+(Bachelor of Computer Applications \(BCA\)) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.161 0.231 rg
+192.2949999999999875 338.8899999999999864 Td
+( • Lovely Professional University \(LPU\)) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.118 0.251 0.686 rg
+441.3849999999999341 338.8899999999999864 Td
+(Graduated 2025 • Punjab, India) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+/F4 8 0 R
+/F5 9 0 R
+/F6 10 0 R
+/F7 11 0 R
+/F8 12 0 R
+/F9 13 0 R
+/F10 14 0 R
+/F11 15 0 R
+/F12 16 0 R
+/F13 17 0 R
+/F14 18 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+19 0 obj
+<<
+/Producer (jsPDF 4.2.1)
+/CreationDate (D:20261107110334+05'30')
+>>
+endobj
+20 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000012163 00000 n 
+0000013980 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000012220 00000 n 
+0000012345 00000 n 
+0000012475 00000 n 
+0000012608 00000 n 
+0000012745 00000 n 
+0000012868 00000 n 
+0000012997 00000 n 
+0000013129 00000 n 
+0000013265 00000 n 
+0000013393 00000 n 
+0000013520 00000 n 
+0000013649 00000 n 
+0000013782 00000 n 
+0000013884 00000 n 
+0000014228 00000 n 
+0000014314 00000 n 
+trailer
+<<
+/Size 21
+/Root 20 0 R
+/Info 19 0 R
+/ID [ <8D38663AC70FB88D6341D02A821586BC> <8D38663AC70FB88D6341D02A821586BC> ]
+>>
+startxref
+14418
+%%EOF
