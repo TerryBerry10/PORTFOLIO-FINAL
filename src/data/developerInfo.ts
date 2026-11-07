@@ -23,37 +23,37 @@ export const developerInfo: DeveloperProfile = {
     linkedin: "https://www.linkedin.com/in/vinay-sankar-6a157b252/",
   },
   resume: {
-    summary: "Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.",
+    summary: "Game Developer with a Bachelor of Computer Applications (BCA) and a post-graduate specialization in Game Technology (M.Sc., in progress). Hands-on with the real-time rendering pipeline through custom HLSL and Shader Graph shaders, particle VFX and GPU-side optimization in Unity (URP), plus prototyping and cinematics in Unreal Engine. Programs in C++ and C# with an object-oriented design approach; familiar with Vulkan, DirectX 11/12 and OpenGL. Experienced in profiling and debugging frame-time problems with the Unity Profiler and Frame Debugger. Based in Bangalore.",
     highlights: [
-      "Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage motion trails, and distortion effects.",
-      "Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops (screen shake, hitstop freeze-frames, hit sparks, physics knockback).",
-      "Built modular C# Object Pooling architecture for high-frequency hit particles and projectiles, eliminating garbage collection spikes and ensuring smooth 60 FPS gameplay.",
-      "Authored dynamic glowing neon shaders, reactive boundary materials, and custom trail renderers for high visual clarity."
+      "Engineered stylized HLSL and Shader Graph shaders inside Unity's URP rendering pipeline for combat auras, afterimage motion trails, and distortion effects.",
+      "Traced frame-time spikes to garbage collection and fixed them with a modular, object-oriented C# pooling architecture, holding a smooth 60 FPS.",
+      "Built a playable grapple-hook movement prototype and two rendered cinematics in Unreal Engine.",
+      "Programs in C++ and C#; familiar with Vulkan, DirectX 11/12 and OpenGL."
     ],
     technicalSkills: [
+      {
+        category: "Programming",
+        items: "C++, C#, C, Object-Oriented Design, JavaScript, HTML5"
+      },
+      {
+        category: "Graphics APIs & Shaders",
+        items: "Vulkan, DirectX 11/12, OpenGL, HLSL, Unity Shader Graph"
+      },
       {
         category: "Game Engines",
         items: "Unity (Advanced - URP / 2D / 3D), Unreal Engine, Godot"
       },
       {
-        category: "Programming & Scripting",
-        items: "C#, C++, C, OOP, JavaScript, HTML5"
+        category: "Rendering & VFX",
+        items: "Real-time rendering pipeline, stylized shaders, Shuriken Particles, Combat VFX, Overdraw Control"
       },
       {
-        category: "Shaders & VFX",
-        items: "Unity Shader Graph, HLSL Programming, Shuriken Particles, Combat VFX"
+        category: "Profiling & Debugging",
+        items: "Unity Profiler, Frame Debugger, Object Pooling, GC-spike elimination"
       },
       {
-        category: "Animation & Rigging",
-        items: "Unity Mecanim Animator, Blend Trees, Ragdoll Physics, Maya / Blender"
-      },
-      {
-        category: "Optimization & Profiling",
-        items: "Unity Profiler, Frame Debugger, Object Pooling, Overdraw Control"
-      },
-      {
-        category: "Tools & Version Control",
-        items: "Git, GitHub, Autodesk Maya, Blender"
+        category: "Animation & Tools",
+        items: "Unity Mecanim, Blend Trees, Ragdoll Physics, Maya / Blender, Git / GitHub"
       }
     ],
     featuredProjects: [
@@ -63,20 +63,35 @@ export const developerInfo: DeveloperProfile = {
         role: "Solo Developer",
         bullets: [
           {
-            heading: "Custom Shaders & Visual Juice",
-            text: "Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage motion trails, and distortion effects inspired by anime fighters."
+            heading: "GPU Rendering & Custom Shaders",
+            text: "Engineered stylized HLSL and Shader Graph shaders inside Unity's URP rendering pipeline for dynamic combat auras, afterimage motion trails, and distortion effects inspired by anime fighters."
           },
           {
             heading: "Combat Feel & Game Feedback",
             text: "Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops (screen shake, hitstop freeze-frames, hit sparks, physics knockback)."
           },
           {
-            heading: "Performance Optimization",
-            text: "Built a modular C# Object Pooling architecture for high-frequency hit particles and projectiles, eliminating garbage collection spikes and ensuring smooth 60 FPS gameplay."
+            heading: "Profiling & Performance",
+            text: "Traced frame-time spikes to garbage collection and fixed them with a modular, object-oriented C# pooling architecture for high-frequency hit particles and projectiles, holding a smooth 60 FPS."
           },
           {
             heading: "Full-Cycle Execution",
             text: "Solo developed all gameplay programming, animation states, custom shaders, and particle systems from scratch."
+          }
+        ]
+      },
+      {
+        title: "Escape the Miraj & Unreal Cinematics",
+        tech: "Unreal Engine",
+        role: "Solo Developer",
+        bullets: [
+          {
+            heading: "Grapple Hook Tech Demo",
+            text: "Built a playable grapple-hook movement prototype in Unreal Engine as the foundation for a planned action game."
+          },
+          {
+            heading: "Cinematic Sequences",
+            text: "Produced two rendered cinematics in Unreal Engine: a car chase and the story intro for Life of an Ant."
           }
         ]
       },
@@ -90,12 +105,8 @@ export const developerInfo: DeveloperProfile = {
             text: "Authored dynamic glowing neon shaders and reactive boundary collision materials that respond visually to high-velocity ball impacts."
           },
           {
-            heading: "VFX & Motion Trails",
-            text: "Created procedural particle bursts and custom trail renderers to ensure high visual clarity during chaotic multi-ball gameplay."
-          },
-          {
             heading: "Physics & Mechanics",
-            text: "Implemented responsive paddle controls, multi-ball trajectory math, and collision detection in C#."
+            text: "Implemented responsive paddle controls, multi-ball trajectory math, collision detection, and custom trail renderers in C#."
           }
         ]
       },
@@ -106,11 +117,7 @@ export const developerInfo: DeveloperProfile = {
         bullets: [
           {
             heading: "Visual Indicators & Shaders",
-            text: "Built custom trail shaders and danger-zone visual cues highlighting predator snake proximity."
-          },
-          {
-            heading: "Particle Feedback & Feel",
-            text: "Designed lightweight particle burst systems triggered upon near-misses and capture events."
+            text: "Built custom trail shaders, danger-zone visual cues, and lightweight particle bursts for near-misses and capture events."
           },
           {
             heading: "AI & Movement Logic",

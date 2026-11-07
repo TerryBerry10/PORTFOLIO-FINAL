@@ -70,7 +70,7 @@ doc.setFont('helvetica', 'normal');
 doc.setFontSize(8.5);
 doc.setTextColor(...darkText);
 
-const summaryText = "Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.";
+const summaryText = "Game Developer with a Bachelor of Computer Applications (BCA) and a post-graduate specialization in Game Technology (M.Sc., in progress). Hands-on with the real-time rendering pipeline through custom HLSL and Shader Graph shaders, particle VFX and GPU-side optimization in Unity (URP), plus prototyping and cinematics in Unreal Engine. Programs in C++ and C# with an object-oriented design approach; familiar with Vulkan, DirectX 11/12 and OpenGL. Experienced in profiling and debugging frame-time problems with the Unity Profiler and Frame Debugger. Based in Bangalore.";
 
 const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
 doc.text(summaryLines, margin, y);
@@ -85,9 +85,9 @@ const col2X = margin + contentWidth * 0.52;
 const colW = contentWidth * 0.46;
 
 const skills = [
-  { c1T: 'Game Engines:', c1D: 'Unity (Advanced - URP / 2D / 3D), Unreal Engine, Godot', c2T: 'Programming & Scripting:', c2D: 'C#, C++, C, OOP, JavaScript, HTML5' },
-  { c1T: 'Shaders & VFX:', c1D: 'Unity Shader Graph, HLSL Programming, Shuriken Particles, Combat VFX', c2T: 'Animation & Rigging:', c2D: 'Unity Mecanim Animator, Blend Trees, Ragdoll Physics, Maya / Blender' },
-  { c1T: 'Optimization & Profiling:', c1D: 'Unity Profiler, Frame Debugger, Object Pooling, Overdraw Control', c2T: 'Tools & Version Control:', c2D: 'Git, GitHub, Autodesk Maya, Blender' }
+  { c1T: 'Programming:', c1D: 'C++, C#, C, Object-Oriented Design, JavaScript, HTML5', c2T: 'Graphics APIs & Shaders:', c2D: 'Vulkan, DirectX 11/12, OpenGL, HLSL, Unity Shader Graph' },
+  { c1T: 'Game Engines:', c1D: 'Unity (Advanced - URP / 2D / 3D), Unreal Engine, Godot', c2T: 'Rendering & VFX:', c2D: 'Real-time rendering pipeline, stylized shaders, Shuriken Particles, Combat VFX, Overdraw Control' },
+  { c1T: 'Profiling & Debugging:', c1D: 'Unity Profiler, Frame Debugger, Object Pooling, GC-spike elimination', c2T: 'Animation & Tools:', c2D: 'Unity Mecanim, Blend Trees, Ragdoll Physics, Maya / Blender, Git / GitHub' }
 ];
 
 for (const row of skills) {
@@ -116,7 +116,7 @@ for (const row of skills) {
   }
 
   const maxLines = Math.max(c1Lines.length, c2Lines.length);
-  y += maxLines > 1 ? 21 : 12;
+  y += 12 + (maxLines - 1) * 10.5;
 }
 y += 4;
 
@@ -128,10 +128,18 @@ const projectsList = [
     title: 'Dottie — 2D Anime-Style 1v1 Combat Game (Unity / C#)',
     role: 'Solo Developer',
     bullets: [
-      { tag: 'Custom Shaders & Visual Juice:', desc: 'Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage motion trails, and distortion effects inspired by anime fighters.' },
+      { tag: 'GPU Rendering & Custom Shaders:', desc: "Engineered stylized HLSL and Shader Graph shaders inside Unity's URP rendering pipeline for dynamic combat auras, afterimage motion trails, and distortion effects inspired by anime fighters." },
       { tag: 'Combat Feel & Game Feedback:', desc: 'Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops (screen shake, hitstop freeze-frames, hit sparks, physics knockback).' },
-      { tag: 'Performance Optimization:', desc: 'Built a modular C# Object Pooling architecture for high-frequency hit particles and projectiles, eliminating garbage collection spikes and ensuring smooth 60 FPS gameplay.' },
+      { tag: 'Profiling & Performance:', desc: 'Traced frame-time spikes to garbage collection and fixed them with a modular, object-oriented C# pooling architecture for high-frequency hit particles and projectiles, holding a smooth 60 FPS.' },
       { tag: 'Full-Cycle Execution:', desc: 'Solo developed all gameplay programming, animation states, custom shaders, and particle systems from scratch.' }
+    ]
+  },
+  {
+    title: 'Escape the Miraj & Unreal Cinematics (Unreal Engine)',
+    role: 'Solo Developer',
+    bullets: [
+      { tag: 'Grapple Hook Tech Demo:', desc: 'Built a playable grapple-hook movement prototype in Unreal Engine as the foundation for a planned action game.' },
+      { tag: 'Cinematic Sequences:', desc: 'Produced two rendered cinematics in Unreal Engine: a car chase and the story intro for Life of an Ant.' }
     ]
   },
   {
@@ -139,16 +147,14 @@ const projectsList = [
     role: 'Gameplay Programmer',
     bullets: [
       { tag: 'Shader & Arena Visuals:', desc: 'Authored dynamic glowing neon shaders and reactive boundary collision materials that respond visually to high-velocity ball impacts.' },
-      { tag: 'VFX & Motion Trails:', desc: 'Created procedural particle bursts and custom trail renderers to ensure high visual clarity during chaotic multi-ball gameplay.' },
-      { tag: 'Physics & Mechanics:', desc: 'Implemented responsive paddle controls, multi-ball trajectory math, and collision detection in C#.' }
+      { tag: 'Physics & Mechanics:', desc: 'Implemented responsive paddle controls, multi-ball trajectory math, collision detection, and custom trail renderers in C#.' }
     ]
   },
   {
     title: 'Bait — Reverse-Snake Survival Game (Unity / C#)',
     role: 'Programmer',
     bullets: [
-      { tag: 'Visual Indicators & Shaders:', desc: 'Built custom trail shaders and danger-zone visual cues highlighting predator snake proximity.' },
-      { tag: 'Particle Feedback & Feel:', desc: 'Designed lightweight particle burst systems triggered upon near-misses and capture events.' },
+      { tag: 'Visual Indicators & Shaders:', desc: 'Built custom trail shaders, danger-zone visual cues, and lightweight particle bursts for near-misses and capture events.' },
       { tag: 'AI & Movement Logic:', desc: 'Programmed predator pursuit algorithms and fluid player navigation mechanics in Unity.' }
     ]
   }
@@ -228,8 +234,9 @@ doc.setFontSize(8.5);
 doc.setFont('helvetica', 'bold');
 doc.setTextColor(...darkText);
 doc.text('M.Sc. in Game Technology', margin, y);
+const edu1W = doc.getTextWidth('M.Sc. in Game Technology');
 doc.setFont('helvetica', 'normal');
-doc.text(' • ICAT Design & Media College (Alagappa University)', margin + doc.getTextWidth('M.Sc. in Game Technology') + 1, y);
+doc.text(' • ICAT Design & Media College (Alagappa University)', margin + edu1W + 1, y);
 
 doc.setFont('helvetica', 'normal');
 doc.setTextColor(...primaryBlue);
@@ -240,8 +247,9 @@ y += 12;
 doc.setFont('helvetica', 'bold');
 doc.setTextColor(...darkText);
 doc.text('Bachelor of Computer Applications (BCA)', margin, y);
+const edu2W = doc.getTextWidth('Bachelor of Computer Applications (BCA)');
 doc.setFont('helvetica', 'normal');
-doc.text(' • Lovely Professional University (LPU)', margin + doc.getTextWidth('Bachelor of Computer Applications (BCA)') + 1, y);
+doc.text(' • Lovely Professional University (LPU)', margin + edu2W + 1, y);
 
 doc.setFont('helvetica', 'normal');
 doc.setTextColor(...primaryBlue);
@@ -251,4 +259,4 @@ doc.text('Graduated 2025 • Punjab, India', rightX, y, { align: 'right' });
 const outPath = path.join(__dirname, '..', 'public', 'Vinay_Sankar_Resume.pdf');
 const pdfBuffer = doc.output('arraybuffer');
 fs.writeFileSync(outPath, Buffer.from(pdfBuffer));
-console.log('Successfully generated public/Vinay_Sankar_Resume.pdf (' + pdfBuffer.byteLength + ' bytes)');
+console.log('Successfully generated public/Vinay_Sankar_Resume.pdf (' + pdfBuffer.byteLength + ' bytes); pages=' + doc.getNumberOfPages() + ', final y=' + y.toFixed(1) + '/' + pageHeight.toFixed(1));
