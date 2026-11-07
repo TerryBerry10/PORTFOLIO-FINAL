@@ -644,6 +644,27 @@ export const ProjectThumbnailCanvas: React.FC<ProjectThumbnailCanvasProps> = ({ 
         ctx.arc(cx, h - 28, 4, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
+      } else {
+        // Fallback for projects without a bespoke preview: a soft horizon with a glowing sun.
+        const sky = ctx.createLinearGradient(0, 0, 0, h);
+        sky.addColorStop(0, '#1b2433');
+        sky.addColorStop(1, '#3b2a3f');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#f5c56b';
+        ctx.shadowColor = '#f5c56b';
+        ctx.shadowBlur = 30;
+        ctx.beginPath();
+        ctx.arc(w * 0.5, h * 0.55, 22, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#0f141c';
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        for (let x = 0; x <= w; x += 8) ctx.lineTo(x, h * 0.72 + Math.sin(x * 0.04) * 6 + Math.sin(x * 0.013) * 10);
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fill();
       }
 
       // Ambient floating dust motes across all thumbnails

@@ -70,7 +70,7 @@ ${formData.email}`);
         {/* Content */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
           <p className="text-sm sm:text-base text-paper-200 leading-relaxed font-sans">
-            Based in <strong className="text-amber-300">{developerInfo.location}</strong> — {developerInfo.status}. Whether you are looking to hire a gameplay engineer, technical artist, or collaborate on innovative game projects, the campfire is always warm.
+            Based in <strong className="text-amber-300">{developerInfo.location}</strong> — {developerInfo.status}. Whether you are looking to hire a game developer or gameplay engineer, or collaborate on innovative game projects, the campfire is always warm.
           </p>
 
           {/* Social Links & Direct Email Cards */}
@@ -108,7 +108,7 @@ ${formData.email}`);
                 </div>
                 <div>
                   <div className="text-[10px] font-mono text-paper-400 uppercase font-bold">GitHub Repositories</div>
-                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">github.com/Nigatron911</div>
+                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">github.com/TerryBerry10</div>
                 </div>
               </div>
               <span className="text-xs font-mono text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>

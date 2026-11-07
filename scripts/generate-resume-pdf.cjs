@@ -30,7 +30,7 @@ doc.text('VINAY SANKAR', margin, y);
 doc.setFont('helvetica', 'bold');
 doc.setFontSize(10);
 doc.setTextColor(...primaryBlue);
-doc.text('TECHNICAL ARTIST • GAME DEVELOPER', margin, y + 14);
+doc.text('GAME DEVELOPER', margin, y + 14);
 
 // Header Right (Contact Info)
 doc.setFont('helvetica', 'normal');
@@ -41,7 +41,7 @@ doc.text('Bangalore, India • +91 7356749187', rightX, y, { align: 'right' });
 doc.setTextColor(...primaryBlue);
 doc.text('sankarvinay70@gmail.com', rightX, y + 12, { align: 'right' });
 doc.setTextColor(...darkText);
-doc.text('Portfolio: final-portfolio-xi-topaz.vercel.app', rightX, y + 24, { align: 'right' });
+doc.text('Portfolio: terryberry10.github.io/portfolio', rightX, y + 24, { align: 'right' });
 
 y += 32;
 
@@ -70,7 +70,7 @@ doc.setFont('helvetica', 'normal');
 doc.setFontSize(8.5);
 doc.setTextColor(...darkText);
 
-const summaryText = "Technically grounded Technical Artist & Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.";
+const summaryText = "Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.";
 
 const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
 doc.text(summaryLines, margin, y);
@@ -126,7 +126,7 @@ drawSectionHeading('Featured Game Projects');
 const projectsList = [
   {
     title: 'Dottie — 2D Anime-Style 1v1 Combat Game (Unity / C#)',
-    role: 'Solo Technical Artist & Developer',
+    role: 'Solo Developer',
     bullets: [
       { tag: 'Custom Shaders & Visual Juice:', desc: 'Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage motion trails, and distortion effects inspired by anime fighters.' },
       { tag: 'Combat Feel & Game Feedback:', desc: 'Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops (screen shake, hitstop freeze-frames, hit sparks, physics knockback).' },
@@ -136,7 +136,7 @@ const projectsList = [
   },
   {
     title: 'Astral Rally — Fast-Paced Multi-Ball Arcade Game (Unity / C#)',
-    role: 'Technical Artist & Gameplay Programmer',
+    role: 'Gameplay Programmer',
     bullets: [
       { tag: 'Shader & Arena Visuals:', desc: 'Authored dynamic glowing neon shaders and reactive boundary collision materials that respond visually to high-velocity ball impacts.' },
       { tag: 'VFX & Motion Trails:', desc: 'Created procedural particle bursts and custom trail renderers to ensure high visual clarity during chaotic multi-ball gameplay.' },
@@ -145,7 +145,7 @@ const projectsList = [
   },
   {
     title: 'Bait — Reverse-Snake Survival Game (Unity / C#)',
-    role: 'Technical Artist & Programmer',
+    role: 'Programmer',
     bullets: [
       { tag: 'Visual Indicators & Shaders:', desc: 'Built custom trail shaders and danger-zone visual cues highlighting predator snake proximity.' },
       { tag: 'Particle Feedback & Feel:', desc: 'Designed lightweight particle burst systems triggered upon near-misses and capture events.' },

@@ -33,11 +33,11 @@ export const levelDesignProjects: LevelDesignProject[] = [
     categoryLabel: 'Environment Art & World Layout',
     engine: 'Unity URP & Custom Shaders',
     year: '2025',
-    heroImage: '/levels/whispers_wide_terrain.png',
+    heroImage: `${import.meta.env.BASE_URL}levels/whispers_wide_terrain.png`,
     images: [
       {
         id: 'wv-1',
-        url: '/levels/whispers_wide_terrain.png',
+        url: `${import.meta.env.BASE_URL}levels/whispers_wide_terrain.png`,
         title: 'Wide Vista & Spatial Landmark Hierarchy',
         caption: 'Wide atmospheric perspective demonstrating clear focal points, natural guiding pathways, and tiered elevation for player orientation.',
         tag: 'Wide Vista Layout'

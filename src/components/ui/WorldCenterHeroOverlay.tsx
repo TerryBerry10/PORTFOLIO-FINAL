@@ -93,13 +93,13 @@ export const WorldCenterHeroOverlay: React.FC<WorldCenterHeroOverlayProps> = ({ 
         {/* Subtle Starlight Halo behind title */}
         <div className="absolute w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" style={{ animationDuration: '4s' }} />
 
-        {/* Hero Title: GAME DEV & TECHNICAL ARTIST in glowing bold clean font */}
+        {/* Hero Title: GAME DEVELOPER in glowing bold clean font */}
         <h1 className="relative font-sans font-black tracking-tight leading-none uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]">
           <span className="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.75)]">
-            GAME DEVELOPER
+            GAME
           </span>
           <span className="block mt-1 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(251,191,36,0.85)]">
-            & TECHNICAL ARTIST
+            DEVELOPER
           </span>
         </h1>
 

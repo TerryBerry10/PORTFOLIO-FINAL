@@ -99,7 +99,7 @@ export const RecruiterViewModal: React.FC<RecruiterViewModalProps> = ({
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>RELEASED GAMES</span>
+                <span>GAMES &amp; PROJECTS</span>
               </h2>
             </div>
 

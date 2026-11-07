@@ -24,14 +24,14 @@ export const workshopSkills: SkillObject[] = [
     category: 'Graphics & Shaders',
     icon: 'Sparkles',
     workshopItem: 'Shader crystal',
-    description: 'The tech-art side of my work. I write shaders in Shader Graph and HLSL and build particle effects that make hits and movement read clearly.',
+    description: 'I write shaders in Shader Graph and HLSL and build particle effects that make hits and movement read clearly.',
     whatIUseItFor: [
       'Combat auras, afterimage trails and distortion effects (Dottie)',
       'Glowing neon materials that react to ball impacts (Astral Rally)',
       'Trail shaders and danger-zone cues (Bait)',
     ],
     projectsUsedIn: ['Dottie', 'Astral Rally', 'Bait'],
-    levelOfExperience: 'Core focus · Technical Art',
+    levelOfExperience: 'Core focus',
     keySpecialties: ['Shader Graph', 'HLSL', 'Shuriken Particles', 'Trail Renderers', 'Combat VFX'],
   },
   {

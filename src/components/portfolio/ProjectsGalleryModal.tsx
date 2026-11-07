@@ -32,7 +32,7 @@ export const ProjectsGalleryModal: React.FC<ProjectsGalleryModalProps> = ({
                   <span>// VINAY SANKAR · PORTFOLIO</span>
                 </span>
                 <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono text-gold-300 font-bold">
-                  {projects.length} SHIPPED GAMES
+                  {projects.length} PROJECTS
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold font-sans text-white tracking-tight">
@@ -70,7 +70,7 @@ export const ProjectsGalleryModal: React.FC<ProjectsGalleryModalProps> = ({
 
           {/* Footer note */}
           <div className="mt-8 pt-4 border-t border-white/15 flex flex-wrap items-center justify-between text-xs font-mono text-paper-300 gap-2">
-            <span>All titles are playable directly in WebGL on Unity Play</span>
+            <span>Released titles are playable directly in WebGL on Unity Play</span>
             <span className="text-gold-300 font-bold">
               Click &quot;PLAY GAME&quot; on any card to switch on the retro TV
             </span>

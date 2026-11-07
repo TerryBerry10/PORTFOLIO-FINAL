@@ -30,10 +30,33 @@ const ResumeModal = lazy(() => import('./components/sections/ResumeModal').then(
 const CampfireContactModal = lazy(() => import('./components/sections/CampfireContactModal').then(m => ({ default: m.CampfireContactModal })));
 const MiniGamesModal = lazy(() => import('./components/sections/MiniGamesModal').then(m => ({ default: m.MiniGamesModal })));
 const RetroTVPlayer = lazy(() => import('./components/portfolio/RetroTVPlayer').then(m => ({ default: m.RetroTVPlayer })));
+const GithubModal = lazy(() => import('./components/sections/GithubModal').then(m => ({ default: m.GithubModal })));
 const UpcomingBillboardModal = lazy(() => import('./components/world/UpcomingBillboardModal').then(m => ({ default: m.UpcomingBillboardModal })));
 import { OPEN_GAME_TV_EVENT, openGameTV } from './utils/gameTV';
 import { Billboard } from './data/billboards';
 import { InteractiveSpiritCursor } from './components/common/InteractiveSpiritCursor';
+
+type ModalId = 'gallery' | 'breakdown' | 'skills' | 'journey' | 'lab' | 'resume' | 'contact' | 'map' | 'quickView' | 'recruiter' | 'minigames' | 'github';
+
+const HASH_ROUTES: Partial<Record<ModalId, string>> = {
+  gallery: 'games', skills: 'skills', journey: 'about', lab: 'lab', resume: 'resume', contact: 'contact', recruiter: 'overview', github: 'code',
+};
+
+function parseHash(): { modal: ModalId | null; project?: Project } {
+  const [route, id] = window.location.hash.replace(/^#\/?/, '').split('/');
+  if (route === 'games' && id) {
+    const project = projects.find(p => p.id === id);
+    if (project) return { modal: 'breakdown', project };
+  }
+  const modal = (Object.keys(HASH_ROUTES) as ModalId[]).find(k => HASH_ROUTES[k] === route);
+  return { modal: modal ?? null };
+}
+
+function toHash(modal: ModalId | null, project: Project): string {
+  if (modal === 'breakdown') return `/games/${project.id}`;
+  const route = modal && HASH_ROUTES[modal];
+  return route ? `/${route}` : '';
+}
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -53,9 +76,27 @@ export function App() {
   // Active Zone & Modals
   const [activeZoneId, setActiveZoneId] = useState<ZoneId | null>(null);
   const [activeModal, setActiveModal] = useState<
-    'gallery' | 'breakdown' | 'skills' | 'journey' | 'lab' | 'resume' | 'contact' | 'map' | 'quickView' | 'recruiter' | 'minigames' | null
-  >(null);
-  const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
+    ModalId | null
+  >(() => parseHash().modal);
+  const [selectedProject, setSelectedProject] = useState<Project>(() => parseHash().project ?? projects[0]);
+
+  // Shareable links: #/games, #/games/<id>, #/resume, #/code ... (opening one skips the landing screen)
+  useEffect(() => {
+    if (parseHash().modal) setIsLoaded(true);
+    const onHash = () => {
+      const { modal, project } = parseHash();
+      if (project) setSelectedProject(project);
+      setActiveModal(modal);
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  useEffect(() => {
+    const next = toHash(activeModal, selectedProject);
+    if (next !== window.location.hash.replace(/^#/, '')) {
+      history.replaceState(null, '', next ? `#${next}` : window.location.pathname + window.location.search);
+    }
+  }, [activeModal, selectedProject]);
 
   // Telemetry for DEV console
   const [telemetry, setTelemetry] = useState({
@@ -132,6 +173,7 @@ export function App() {
       import('./components/sections/LabExperimentsModal');
       import('./components/sections/MiniGamesModal');
       import('./components/world/WorldMapModal');
+      import('./components/sections/GithubModal');
     };
     const ric = (window as any).requestIdleCallback as ((cb: () => void) => number) | undefined;
     const id = ric ? ric(warm) : window.setTimeout(warm, 1500);
@@ -216,6 +258,9 @@ export function App() {
         break;
       case 'resume':
         setActiveModal('resume');
+        break;
+      case 'code':
+        setActiveModal('github');
         break;
       case 'contact':
         setActiveModal('contact');
@@ -329,6 +374,7 @@ export function App() {
         <ProjectBreakdownModal
           project={selectedProject}
           onClose={() => setActiveModal('gallery')}
+          onSelectProject={setSelectedProject}
         />
       )}
 
@@ -388,6 +434,12 @@ export function App() {
           onClose={() => setActiveModal(null)}
           onOpenBreakdown={handleOpenBreakdown}
           onOpenResume={() => setActiveModal('resume')}
+        />
+      )}
+
+      {activeModal === 'github' && (
+        <GithubModal
+          onClose={() => setActiveModal(null)}
         />
       )}
 

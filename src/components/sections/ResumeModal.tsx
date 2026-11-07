@@ -16,7 +16,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
 ${developerInfo.name.toUpperCase()}
 ${developerInfo.title.toUpperCase()}
 Location: ${developerInfo.location} | Phone: ${developerInfo.phone || '+91 7356749187'}
-Email: ${developerInfo.email} | Portfolio: ${developerInfo.portfolioUrl || 'https://final-portfolio-xi-topaz.vercel.app'}
+Email: ${developerInfo.email} | Portfolio: ${developerInfo.portfolioUrl || 'https://terryberry10.github.io/portfolio'}
 
 ==================================================
 PROFESSIONAL SUMMARY
@@ -86,7 +86,7 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
           <div className="flex items-center gap-2">
             {/* Direct PDF Download Button */}
             <a
-              href="/Vinay_Sankar_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}Vinay_Sankar_Resume.pdf`}
               download="Vinay_Sankar_Resume.pdf"
               onClick={() => AudioEngine.playSfx('interact')}
               className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-mono text-xs sm:text-sm font-black rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] hover:shadow-[0_0_35px_rgba(245,158,11,0.9)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
@@ -158,8 +158,8 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
                 </div>
                 <div className="text-slate-600">
                   Portfolio:{' '}
-                  <a href={developerInfo.portfolioUrl || 'https://final-portfolio-xi-topaz.vercel.app'} target="_blank" rel="noreferrer" className="text-[#1e40af] hover:underline font-medium">
-                    final-portfolio-xi-topaz.vercel.app
+                  <a href={developerInfo.portfolioUrl || 'https://terryberry10.github.io/portfolio'} target="_blank" rel="noreferrer" className="text-[#1e40af] hover:underline font-medium">
+                    terryberry10.github.io/portfolio
                   </a>
                 </div>
               </div>
@@ -268,7 +268,7 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
 
           <div className="flex items-center gap-3">
             <a
-              href="/Vinay_Sankar_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}Vinay_Sankar_Resume.pdf`}
               target="_blank"
               rel="noreferrer"
               className="text-amber-300 font-bold hover:underline flex items-center gap-1 cursor-pointer"

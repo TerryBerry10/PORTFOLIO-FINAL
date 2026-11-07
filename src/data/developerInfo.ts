@@ -2,28 +2,28 @@ import { DeveloperProfile } from '../types/skills';
 
 export const developerInfo: DeveloperProfile = {
   name: "Vinay Sankar",
-  title: "Technical Artist • Game Developer",
+  title: "Game Developer",
   handle: "vinaysankar",
   tagline: "I make small, fast games and the shaders and effects that make them feel good.",
-  shortBio: "Technical artist and game developer, currently in the second year of an M.Sc. in Game Technology. I work mostly in Unity and C#, and I focus on shaders, VFX and game feel. I have released three browser-playable games, and you can play all of them on this site.",
+  shortBio: "Game developer, currently in the second year of an M.Sc. in Game Technology. I work mostly in Unity and C#, and I focus on gameplay, game feel, shaders and VFX. I have released three browser-playable games, and you can play all of them on this site.",
   extendedBio: [
     "I like the point where code meets art: the shader that makes a hit look powerful, the two frames of hitstop that make it feel powerful.",
     "Most of my work is in Unity (URP, 2D and 3D) with C#, Shader Graph and HLSL. I also use Blender and Maya, and I write JavaScript and TypeScript. This portfolio is hand-built in React with a canvas-rendered world.",
-    "I'm looking for a technical art or gameplay role where I can keep learning from people who ship games."
+    "I'm looking for a game developer or gameplay programmer role where I can keep learning from people who ship games."
   ],
   philosophy: "Make it readable, make it feel good, then make it fast.",
   location: "Bangalore, India",
   phone: "+91 7356749187",
-  portfolioUrl: "https://final-portfolio-xi-topaz.vercel.app",
+  portfolioUrl: "https://terryberry10.github.io/portfolio",
   status: "Open for Full-Time & Remote Roles",
   email: "sankarvinay70@gmail.com",
   links: {
-    github: "https://github.com/Nigatron911",
+    github: "https://github.com/TerryBerry10",
     unityPlay: "https://play.unity.com/en/user/1aa32da2-fe9b-426b-8af6-3c6d4b65f3b6",
     linkedin: "https://www.linkedin.com/in/vinay-sankar-6a157b252/",
   },
   resume: {
-    summary: "Technically grounded Technical Artist & Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.",
+    summary: "Game Developer with a solid foundation in Computer Applications (BCA) and advanced post-graduate specialization in Game Technology (M.Sc.). Skilled in Unity (URP), C# scripting, Shader Graph, HLSL shader programming, real-time particle VFX, and Mecanim animation state machines. Experienced in bridging art and engineering to craft responsive combat feedback, custom stylized shaders, and optimized game systems. Based in Bangalore, eager to contribute to mobile and PC game production pipelines.",
     highlights: [
       "Engineered stylized custom shaders in Shader Graph & HLSL for dynamic combat auras, afterimage motion trails, and distortion effects.",
       "Designed responsive combo attack choreography, special attacks, and punchy audiovisual feedback loops (screen shake, hitstop freeze-frames, hit sparks, physics knockback).",
@@ -60,7 +60,7 @@ export const developerInfo: DeveloperProfile = {
       {
         title: "Dottie — 2D Anime-Style 1v1 Combat Game",
         tech: "Unity / C#",
-        role: "Solo Technical Artist & Developer",
+        role: "Solo Developer",
         bullets: [
           {
             heading: "Custom Shaders & Visual Juice",
@@ -83,7 +83,7 @@ export const developerInfo: DeveloperProfile = {
       {
         title: "Astral Rally — Fast-Paced Multi-Ball Arcade Game",
         tech: "Unity / C#",
-        role: "Technical Artist & Gameplay Programmer",
+        role: "Gameplay Programmer",
         bullets: [
           {
             heading: "Shader & Arena Visuals",
@@ -102,7 +102,7 @@ export const developerInfo: DeveloperProfile = {
       {
         title: "Bait — Reverse-Snake Survival Game",
         tech: "Unity / C#",
-        role: "Technical Artist & Programmer",
+        role: "Programmer",
         bullets: [
           {
             heading: "Visual Indicators & Shaders",

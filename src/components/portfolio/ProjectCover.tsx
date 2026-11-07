@@ -14,7 +14,7 @@ export const MediaView: React.FC<MediaViewProps> = ({ media, className = '', con
     <video
       src={media.src}
       poster={media.poster}
-      className={`w-full object-cover bg-black ${className}`}
+      className={`w-full ${controls ? 'object-contain' : 'object-cover'} bg-black ${className}`}
       autoPlay={!controls}
       loop={!controls}
       muted={!controls}

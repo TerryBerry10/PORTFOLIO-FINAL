@@ -11,11 +11,15 @@ export interface Project {
   id: string;
   title: string;
   subtitle: string;
-  year: string;
+  /** Omitted when not yet confirmed. */
+  year?: string;
+  /** Games by default; cinematics are video-only work. */
+  kind?: 'game' | 'cinematic';
   category: '3D Action' | '2D Physics Roguelike' | 'Procedural Simulation' | 'Multiplayer Tactical' | 'Atmospheric Narrative' | 'Physics Platformer' | string;
-  role: string;
+  /** Omitted when not yet confirmed. */
+  role?: string;
   platform: string;
-  status: 'Released' | 'Playable Prototype' | 'In Development' | 'Tech Demo';
+  status: 'Released' | 'Coming Soon' | 'Playable Prototype' | 'In Development' | 'Tech Demo';
   featured: boolean;
   technologies: string[];
   playableUrl?: string;

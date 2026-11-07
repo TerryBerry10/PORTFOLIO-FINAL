@@ -56,7 +56,7 @@ export const HeroOverlay: React.FC<HeroOverlayProps> = ({
         <div className="flex items-center gap-2 mb-2.5">
           <span className="text-[11px] font-mono font-bold text-gold-400 uppercase tracking-wider flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-gold-300" />
-            // GAME DEVELOPER · TECHNICAL ARTIST
+            // GAME DEVELOPER
           </span>
         </div>
 

@@ -32,6 +32,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
     setTilt({ x: 0, y: 0 });
   };
 
+  const playable = Boolean(project.playableUrl);
+
+  const openStudy = (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
+    AudioEngine.playSfx('openModal');
+    onOpenBreakdown?.(project);
+  };
+
   const handlePlayClick = (e: React.MouseEvent) => {
     e.preventDefault();
     AudioEngine.playSfx('interact');
@@ -67,12 +75,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
       <div>
         {/* Live Interactive Canvas Preview Banner */}
         <a
-          href={project.playableUrl}
+          href={project.playableUrl ?? '#'}
           target="_blank"
           rel="noreferrer"
-          onClick={handlePlayClick}
+          onClick={playable ? handlePlayClick : openStudy}
           className="block relative mb-4 rounded-xl overflow-hidden shadow-lg border border-white/15 group-hover:border-gold-400/80 transition-colors"
-          title={`Play ${project.title} on the retro TV`}
+          title={playable ? `Play ${project.title} on the retro TV` : `${project.title} case study`}
         >
           <ProjectCover project={project} className="h-40 sm:h-44" />
           
@@ -84,13 +92,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
             </div>
           )}
 
-          {/* Hover Play Overlay */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-            <div className="px-4 py-2 rounded-xl bg-gold-500/90 text-charcoal-950 font-mono font-bold text-xs flex items-center gap-2 shadow-lg backdrop-blur-sm transform scale-95 group-hover:scale-100 transition-transform">
-              <Play className="w-3.5 h-3.5 fill-current" />
-              <span>PLAY ON TV</span>
+          {/* Status pill for unreleased work */}
+          {!playable && (
+            <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/80 border border-white/25 text-[10px] font-mono font-bold text-paper-200 tracking-wider uppercase backdrop-blur-md shadow-md">
+              {project.status}
             </div>
-          </div>
+          )}
+
+          {/* Hover Play Overlay */}
+          {playable && (
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+              <div className="px-4 py-2 rounded-xl bg-gold-500/90 text-charcoal-950 font-mono font-bold text-xs flex items-center gap-2 shadow-lg backdrop-blur-sm transform scale-95 group-hover:scale-100 transition-transform">
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>PLAY ON TV</span>
+              </div>
+            </div>
+          )}
         </a>
 
         {/* Title & Year */}
@@ -98,9 +115,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           <h3 className="font-bold font-sans text-lg sm:text-xl text-white group-hover:text-gold-300 transition-colors duration-200 tracking-tight">
             {project.title}
           </h3>
-          <span className="text-xs font-mono text-gold-400/90 font-bold shrink-0">
-            {project.year}
-          </span>
+          {project.year && (
+            <span className="text-xs font-mono text-gold-400/90 font-bold shrink-0">
+              {project.year}
+            </span>
+          )}
         </div>
 
         {/* Subtitle in High-Contrast Glowing Amber/Gold */}
@@ -127,22 +146,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
       </div>
 
       {/* Actions: play on the TV, or read the engineering case study */}
-      <div className="pt-2 grid grid-cols-2 gap-2">
-        <a
-          href={project.playableUrl}
-          target="_blank"
-          rel="noreferrer"
-          onClick={handlePlayClick}
-          className="w-full py-3 bg-gradient-to-r from-gold-500 to-amber-400 hover:from-gold-400 hover:to-amber-300 text-charcoal-950 font-mono text-xs font-bold rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 group-hover:scale-[1.02]"
-        >
-          <Play className="w-3.5 h-3.5 fill-current" />
-          <span>PLAY GAME</span>
-        </a>
+      <div className={`pt-2 grid gap-2 ${playable ? 'grid-cols-2' : 'grid-cols-1'}`}>
+        {playable && (
+          <a
+            href={project.playableUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={handlePlayClick}
+            className="w-full py-3 bg-gradient-to-r from-gold-500 to-amber-400 hover:from-gold-400 hover:to-amber-300 text-charcoal-950 font-mono text-xs font-bold rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 group-hover:scale-[1.02]"
+          >
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span>PLAY GAME</span>
+          </a>
+        )}
         <button
-          onClick={() => {
-            AudioEngine.playSfx('openModal');
-            onOpenBreakdown?.(project);
-          }}
+          onClick={openStudy}
           className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gold-400/70 text-white font-mono text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
         >
           <BookOpen className="w-3.5 h-3.5" />

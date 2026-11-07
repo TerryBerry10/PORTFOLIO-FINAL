@@ -64,7 +64,7 @@ export const JourneyTreeModal: React.FC<JourneyTreeModalProps> = ({ onClose }) =
         {/* Content Body */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
           <p className="text-sm sm:text-base text-paper-200 leading-relaxed max-w-3xl font-sans">
-            I am <strong className="text-white font-bold">Vinay Sankar</strong>, a Game Developer and Technical Artist who builds high-impact games, shaders, and living playable worlds. Below are the architectural breakdowns and gameplay mechanics across my 3 shipped titles.
+            I am <strong className="text-white font-bold">Vinay Sankar</strong>, a Game Developer who builds high-impact games, shaders, and living playable worlds. Below are the architectural breakdowns and gameplay mechanics across my 3 shipped titles.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -164,7 +164,7 @@ export const JourneyTreeModal: React.FC<JourneyTreeModalProps> = ({ onClose }) =
 
           {/* Footer note */}
           <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-between text-xs font-mono text-paper-300 gap-2">
-            <span>VINAY SANKAR // GAME DEVELOPER & TECHNICAL ARTIST</span>
+            <span>VINAY SANKAR // GAME DEVELOPER</span>
             <span className="text-amber-400 font-bold">
               BANGALORE, INDIA · OPEN FOR FULL-TIME & REMOTE
             </span>

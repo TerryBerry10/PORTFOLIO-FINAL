@@ -127,7 +127,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             </div>
 
             <div className="space-y-3">
-              {projects.map(p => (
+              {projects.filter(p => p.featured).map(p => (
                 <div
                   key={p.id}
                   className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4 hover:border-amber-400/60 transition-all shadow-lg"
@@ -136,7 +136,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     <div className="flex items-center gap-2 mb-1.5">
                       <span className="font-bold text-base font-sans text-white">{p.title}</span>
                       <span className="text-xs font-mono text-amber-300 bg-amber-950/60 px-3 py-0.5 rounded-full border border-amber-500/40">
-                        {p.subtitle} · {p.year}
+                        {p.subtitle}{p.year ? ` · ${p.year}` : ''}
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm text-paper-300 line-clamp-1">{p.shortDescription}</p>
