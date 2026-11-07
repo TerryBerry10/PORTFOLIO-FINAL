@@ -317,6 +317,7 @@ export const projects: Project[] = [
     media: [
       { type: 'video', src: 'media/life-of-an-ant/cover.mp4', poster: 'media/life-of-an-ant/cover.jpg' },
       { type: 'video', src: 'media/life-of-an-ant/prototype.mp4', poster: 'media/life-of-an-ant/prototype.jpg', caption: 'Life of an Ant prototype' },
+      { type: 'video', src: 'media/unreal-cinematics/life-of-an-ant.mp4', poster: 'media/unreal-cinematics/life-of-an-ant.jpg', caption: 'Life of an Ant cinematic (Unreal Engine)' },
     ],
     shortDescription: 'An upcoming story-based simulation puzzle game.',
     hook: 'An upcoming simulation puzzle game with a story, seen from an ant\'s point of view.',
