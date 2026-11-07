@@ -14,7 +14,7 @@ export const developerInfo: DeveloperProfile = {
   philosophy: "Make it readable, make it feel good, then make it fast.",
   location: "Bangalore, India",
   phone: "+91 7356749187",
-  portfolioUrl: "https://terryberry10.github.io/portfolio",
+  portfolioUrl: "https://terryberry10.github.io/PORTFOLIO-FINAL",
   status: "Open for Full-Time & Remote Roles",
   email: "sankarvinay70@gmail.com",
   links: {

@@ -41,7 +41,7 @@ doc.text('Bangalore, India • +91 7356749187', rightX, y, { align: 'right' });
 doc.setTextColor(...primaryBlue);
 doc.text('sankarvinay70@gmail.com', rightX, y + 12, { align: 'right' });
 doc.setTextColor(...darkText);
-doc.text('Portfolio: terryberry10.github.io/portfolio', rightX, y + 24, { align: 'right' });
+doc.text('Portfolio: terryberry10.github.io/PORTFOLIO-FINAL', rightX, y + 24, { align: 'right' });
 
 y += 32;
 

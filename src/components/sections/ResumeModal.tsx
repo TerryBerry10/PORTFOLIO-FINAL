@@ -16,7 +16,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
 ${developerInfo.name.toUpperCase()}
 ${developerInfo.title.toUpperCase()}
 Location: ${developerInfo.location} | Phone: ${developerInfo.phone || '+91 7356749187'}
-Email: ${developerInfo.email} | Portfolio: ${developerInfo.portfolioUrl || 'https://terryberry10.github.io/portfolio'}
+Email: ${developerInfo.email} | Portfolio: ${developerInfo.portfolioUrl || 'https://terryberry10.github.io/PORTFOLIO-FINAL'}
 
 ==================================================
 PROFESSIONAL SUMMARY
@@ -158,8 +158,8 @@ ${resume.education.map(ed => `• ${ed.degree} • ${ed.institution} (${ed.year}
                 </div>
                 <div className="text-slate-600">
                   Portfolio:{' '}
-                  <a href={developerInfo.portfolioUrl || 'https://terryberry10.github.io/portfolio'} target="_blank" rel="noreferrer" className="text-[#1e40af] hover:underline font-medium">
-                    terryberry10.github.io/portfolio
+                  <a href={developerInfo.portfolioUrl || 'https://terryberry10.github.io/PORTFOLIO-FINAL'} target="_blank" rel="noreferrer" className="text-[#1e40af] hover:underline font-medium">
+                    terryberry10.github.io/PORTFOLIO-FINAL
                   </a>
                 </div>
               </div>
